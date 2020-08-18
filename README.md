@@ -1,5 +1,5 @@
 # .NET Summer 2020 (external)
-## Task06. LINQ
+## Task07. LINQ
 ### Task
 * Supplement the database developed in Task06 with information about the specialty for each group and the full name of the examiner for each test and exam.
 * Implement CRUD using LINQ-to-SQL.
