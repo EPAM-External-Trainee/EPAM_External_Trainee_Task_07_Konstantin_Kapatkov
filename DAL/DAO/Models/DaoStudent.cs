@@ -1,11 +1,8 @@
 ﻿using DAL.DAO.Interfaces;
 using DAL.ORM.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -30,13 +27,19 @@ namespace DAL.DAO.Models
 
         public void Update(Student data)
         {
-            using DataContext db = new DataContext(_connectionString);
+            DataContext db = new DataContext(_connectionString);
             Student student = db.GetTable<Student>().FirstOrDefault(s => s.Id == data.Id);
 
             if (student != null)
             {
-                student = data;
+                student.Name = data.Name;
+                student.Surname = data.Surname;
+                student.Patronymic = data.Patronymic;
+                student.Birthday = data.Birthday;
+                student.GenderId = data.GenderId;
+                student.GroupId = data.GroupId;
                 db.SubmitChanges();
+                db.Dispose();
             }
         }
 

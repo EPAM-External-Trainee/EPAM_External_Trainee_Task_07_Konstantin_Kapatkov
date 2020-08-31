@@ -32,7 +32,8 @@ namespace DAL.DAO.Models
 
             if (session != null)
             {
-                session = data;
+                session.Name = data.Name;
+                session.AcademicYear = data.AcademicYear;
                 db.SubmitChanges();
             }
         }

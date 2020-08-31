@@ -32,7 +32,7 @@ namespace DAL.DAO.Models
 
             if (gender != null)
             {
-                gender = data;
+                gender.GenderType = data.GenderType;
                 db.SubmitChanges();
             }
         }

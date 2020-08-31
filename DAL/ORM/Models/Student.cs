@@ -33,22 +33,5 @@ namespace DAL.ORM.Models
 
         [Column(Name = "GroupId")]
         public int GroupId { get; set; }
-
-        public override bool Equals(object obj) => obj is Student student && Id == student.Id && Name == student.Name && Surname == student.Surname && Patronymic == student.Patronymic && GenderId == student.GenderId && Birthday == student.Birthday && GroupId == student.GroupId;
-
-        public override int GetHashCode()
-        {
-            int hashCode = -176023447;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + Name.GetHashCode();
-            hashCode = hashCode * -1521134295 + Surname.GetHashCode();
-            hashCode = hashCode * -1521134295 + Patronymic.GetHashCode();
-            hashCode = hashCode * -1521134295 + Birthday.GetHashCode();
-            hashCode = hashCode * -1521134295 + GenderId.GetHashCode();
-            hashCode = hashCode * -1521134295 + GroupId.GetHashCode();
-            return hashCode;
-        }
-
-        public override string ToString() => $"Student id: {Id}, name: {Name}, surname: {Surname}, patronymic: {Patronymic}, gender id: {GenderId}, birthday: {Birthday.ToShortDateString()}, group id: {GroupId}.";
     }
 }

@@ -20,18 +20,5 @@ namespace DAL.ORM.Models
 
         [Column(Name = "GroupSpecialtyId")]
         public int GroupSpecialtyId { get; set; }
-
-        public override bool Equals(object obj) => obj is Group group && Id == group.Id && Name == group.Name && GroupSpecialtyId == group.GroupSpecialtyId;
-
-        public override int GetHashCode()
-        {
-            int hashCode = -1574230485;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + Name.GetHashCode();
-            hashCode = hashCode * -1521134295 + GroupSpecialtyId.GetHashCode();
-            return hashCode;
-        }
-
-        public override string ToString() => $"Group id: {Id}, name: {Name}, specialty id: {GroupSpecialtyId}.";
     }
 }

@@ -32,7 +32,7 @@ namespace DAL.DAO.Models
 
             if (form != null)
             {
-                form = data;
+                form.Form = data.Form;
                 db.SubmitChanges();
             }
         }

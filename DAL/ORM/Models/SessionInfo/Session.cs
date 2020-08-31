@@ -20,18 +20,5 @@ namespace DAL.ORM.Models.SessionInfo
 
         [Column(Name = "AcademicYear")]
         public string AcademicYear { get; set; }
-
-        public override bool Equals(object obj) => obj is Session session && Id == session.Id && Name == session.Name && AcademicYear == session.AcademicYear;
-
-        public override int GetHashCode()
-        {
-            int hashCode = -963778851;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + Name.GetHashCode();
-            hashCode = hashCode * -1521134295 + AcademicYear.GetHashCode();
-            return hashCode;
-        }
-
-        public override string ToString() => $"{Name}, academic year: {AcademicYear}";
     }
 }

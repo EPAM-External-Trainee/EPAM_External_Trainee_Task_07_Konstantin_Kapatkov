@@ -32,7 +32,12 @@ namespace DAL.DAO.Models
 
             if (sessionSchedule != null)
             {
-                sessionSchedule = data;
+                sessionSchedule.SessionId = data.SessionId;
+                sessionSchedule.SubjectId = data.SubjectId;
+                sessionSchedule.KnowledgeAssessmentFormId = data.KnowledgeAssessmentFormId;
+                sessionSchedule.GroupId = data.GroupId;
+                sessionSchedule.ExaminerId = data.ExaminerId;
+                sessionSchedule.Date = data.Date;
                 db.SubmitChanges();
             }
         }

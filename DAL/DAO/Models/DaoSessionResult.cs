@@ -32,7 +32,10 @@ namespace DAL.DAO.Models
 
             if (sessionResult != null)
             {
-                sessionResult = data;
+                sessionResult.SessionId = data.SessionId;
+                sessionResult.Assessment = data.Assessment;
+                sessionResult.StudentId = data.StudentId;
+                sessionResult.SubjectId = data.SubjectId;
                 db.SubmitChanges();
             }
         }

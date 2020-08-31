@@ -17,17 +17,5 @@ namespace DAL.ORM.Models
 
         [Column(Name = "GenderType")]
         public string GenderType { get; set; }
-
-        public override bool Equals(object obj) => obj is Gender gender && Id == gender.Id && GenderType == gender.GenderType;
-
-        public override int GetHashCode()
-        {
-            int hashCode = 1714723304;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + GenderType.GetHashCode();
-            return hashCode;
-        }
-
-        public override string ToString() => $"Gender id: {Id}, type: {GenderType}.";
     }
 }

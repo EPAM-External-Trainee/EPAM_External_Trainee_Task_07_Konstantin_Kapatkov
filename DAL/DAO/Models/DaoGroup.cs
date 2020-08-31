@@ -32,7 +32,8 @@ namespace DAL.DAO.Models
 
             if (group != null)
             {
-                group = data;
+                group.Name = data.Name;
+                group.GroupSpecialtyId = data.GroupSpecialtyId;
                 db.SubmitChanges();
             }
         }

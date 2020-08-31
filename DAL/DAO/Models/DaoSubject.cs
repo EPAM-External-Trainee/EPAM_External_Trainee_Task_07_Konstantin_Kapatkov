@@ -32,7 +32,7 @@ namespace DAL.DAO.Models
 
             if (subject != null)
             {
-                subject = data;
+                subject.Name = data.Name;
                 db.SubmitChanges();
             }
         }
