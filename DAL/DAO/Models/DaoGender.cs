@@ -10,7 +10,7 @@ namespace DAL.DAO.Models
     {
         private readonly string _connectionString;
 
-        public DaoGender(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
+        public DaoGender(string connectionString) => _connectionString = connectionString;
 
         public void Create(Gender data)
         {

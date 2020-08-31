@@ -10,7 +10,7 @@ namespace DAL.DAO.Models
     {
         private readonly string _connectionString;
 
-        public DaoGroup(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
+        public DaoGroup(string connectionString) => _connectionString = connectionString;
 
         public void Create(Group data)
         {
