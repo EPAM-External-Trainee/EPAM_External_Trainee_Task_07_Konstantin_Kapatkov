@@ -42,10 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Abstract\Report.cs" />
+    <Compile Include="Reports\Interfaces\IReport.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\IExaminersTableRawView.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\IGroupSpecialtyTableRawView.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTableRawView.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReportData.cs" />
+    <Compile Include="Reports\Models\SessionResultReport.cs" />
+    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\ExaminersTableRawView.cs" />
+    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupSpecialtyTableRawView.cs" />
+    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupTableRawView.cs" />
+    <Compile Include="Reports\Structs\ReportData\SessionResultReportData.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reports\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{3d941b49-a3c8-4b94-b1b8-2836e5d565f9}</Project>

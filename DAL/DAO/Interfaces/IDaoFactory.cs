@@ -5,24 +5,24 @@ namespace DAL.DAO.Interfaces
 {
     public interface IDaoFactory
     {
-        IDao<Gender> GetGender();
+        IDao<Gender> GetDaoGender();
 
-        IDao<Group> GetGroup();
+        IDao<Group> GetDaoGroup();
 
-        IDao<GroupSpecialty> GetGroupSpecialty();
+        IDao<GroupSpecialty> GetDaoGroupSpecialty();
 
-        IDao<KnowledgeAssessmentForm> GetKnowledgeAssessmentForm();
+        IDao<KnowledgeAssessmentForm> GetDaoKnowledgeAssessmentForm();
 
-        IDao<Subject> GetSubject();
+        IDao<Subject> GetDaoSubject();
 
-        IDao<Student> GetStudent();
+        IDao<Student> GetDaoStudent();
 
-        IDao<Session> GetSession();
+        IDao<Session> GetDaoSession();
 
-        IDao<SessionSchedule> GetSessionSchedule();
+        IDao<SessionSchedule> GetDaoSessionSchedule();
 
-        IDao<SessionResult> GetSessionResult();
+        IDao<SessionResult> GetDaoSessionResult();
 
-        IDao<Examiner> GetExaminer();
+        IDao<Examiner> GetDaoExaminer();
     }
 }
