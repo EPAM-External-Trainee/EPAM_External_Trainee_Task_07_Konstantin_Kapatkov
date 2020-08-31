@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D941B49-A3C8-4B94-B1B8-2836E5D565F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ORM\Interfaces\IExaminer.cs" />
+    <Compile Include="ORM\Interfaces\IGender.cs" />
+    <Compile Include="ORM\Interfaces\IGroup.cs" />
+    <Compile Include="ORM\Interfaces\IGroupSpecialty.cs" />
+    <Compile Include="ORM\Interfaces\IKnowledgeAssessmentForm.cs" />
+    <Compile Include="ORM\Interfaces\IStudent.cs" />
+    <Compile Include="ORM\Interfaces\ISubject.cs" />
+    <Compile Include="ORM\Interfaces\SessionInfo\ISession.cs" />
+    <Compile Include="ORM\Interfaces\SessionInfo\ISessionResult.cs" />
+    <Compile Include="ORM\Interfaces\SessionInfo\ISessionSchedule.cs" />
+    <Compile Include="ORM\Models\Gender.cs" />
+    <Compile Include="ORM\Models\Group.cs" />
+    <Compile Include="ORM\Models\KnowledgeAssessmentForm.cs" />
+    <Compile Include="ORM\Models\SessionInfo\Session.cs" />
+    <Compile Include="ORM\Models\SessionInfo\SessionResult.cs" />
+    <Compile Include="ORM\Models\SessionInfo\SessionSchedule.cs" />
+    <Compile Include="ORM\Models\Student.cs" />
+    <Compile Include="ORM\Models\Subject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\03_CreatingRelationshipsBetweenTables.sql" />
+    <Content Include="DB\01_DBCreation.sql" />
+    <Content Include="DB\04_FillingInTables.sql" />
+    <Content Include="DB\02_TablesCreation.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

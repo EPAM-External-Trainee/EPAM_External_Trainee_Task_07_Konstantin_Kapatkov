@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ResultsOfTheSessionNUnitTest")]
+[assembly: AssemblyTitle("ResultOfTheSessionUnitTestProject")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ResultsOfTheSessionNUnitTest")]
+[assembly: AssemblyProduct("ResultOfTheSessionUnitTestProject")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("bd780b28-be57-417b-8346-e3df839f964b")]
+[assembly: Guid("dc8253d9-31e0-41b7-9c83-dc221bf74230")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
