@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\Interfaces\IDao.cs" />
+    <Compile Include="DAO\Interfaces\IDaoFactory.cs" />
+    <Compile Include="DAO\Models\DaoFactory.cs" />
+    <Compile Include="DAO\Models\DaoGender.cs" />
     <Compile Include="ORM\Interfaces\IExaminer.cs" />
     <Compile Include="ORM\Interfaces\IGender.cs" />
     <Compile Include="ORM\Interfaces\IGroup.cs" />
@@ -63,9 +68,7 @@
     <Compile Include="ORM\Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DB\03_CreatingRelationshipsBetweenTables.sql" />
     <Content Include="DB\01_DBCreation.sql" />
