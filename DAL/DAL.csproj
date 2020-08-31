@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,8 +46,17 @@
   <ItemGroup>
     <Compile Include="DAO\Interfaces\IDao.cs" />
     <Compile Include="DAO\Interfaces\IDaoFactory.cs" />
+    <Compile Include="DAO\Models\DaoExaminer.cs" />
     <Compile Include="DAO\Models\DaoFactory.cs" />
     <Compile Include="DAO\Models\DaoGender.cs" />
+    <Compile Include="DAO\Models\DaoGroup.cs" />
+    <Compile Include="DAO\Models\DaoGroupSpecialty.cs" />
+    <Compile Include="DAO\Models\DaoKnowledgeAssessmentForm.cs" />
+    <Compile Include="DAO\Models\DaoSession.cs" />
+    <Compile Include="DAO\Models\DaoSessionResult.cs" />
+    <Compile Include="DAO\Models\DaoSessionSchedule.cs" />
+    <Compile Include="DAO\Models\DaoStudent.cs" />
+    <Compile Include="DAO\Models\DaoSubject.cs" />
     <Compile Include="ORM\Interfaces\IExaminer.cs" />
     <Compile Include="ORM\Interfaces\IGender.cs" />
     <Compile Include="ORM\Interfaces\IGroup.cs" />
@@ -70,10 +81,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DB\03_CreatingRelationshipsBetweenTables.sql" />
-    <Content Include="DB\01_DBCreation.sql" />
-    <Content Include="DB\04_FillingInTables.sql" />
-    <Content Include="DB\02_TablesCreation.sql" />
+    <Content Include="DB\DBDeployment\03_CreatingRelationshipsBetweenTables.sql" />
+    <Content Include="DB\DBDeployment\01_DBCreation.sql" />
+    <Content Include="DB\DBDeployment\04_FillingInTables.sql" />
+    <Content Include="DB\DBDeployment\02_TablesCreation.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

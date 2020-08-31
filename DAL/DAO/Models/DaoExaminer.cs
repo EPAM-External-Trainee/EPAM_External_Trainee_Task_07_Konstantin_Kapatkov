@@ -6,33 +6,33 @@ using System.Linq;
 
 namespace DAL.DAO.Models
 {
-    public class DaoGender : IDao<Gender>
+    public class DaoExaminer : IDao<Examiner>
     {
         private readonly string _connectionString;
 
-        public DaoGender(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
+        public DaoExaminer(string connectionString) => _connectionString = connectionString;
 
-        public void Create(Gender data)
+        public void Create(Examiner data)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().InsertOnSubmit(data);
+            db.GetTable<Examiner>().InsertOnSubmit(data);
             db.SubmitChanges();
         }
 
-        public Gender Read(int id)
+        public Examiner Read(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().FirstOrDefault(g => g.Id == id);
+            return db.GetTable<Examiner>().FirstOrDefault(e => e.Id == id);
         }
 
-        public void Update(Gender data)
+        public void Update(Examiner data)
         {
             using DataContext db = new DataContext(_connectionString);
-            Gender gender = db.GetTable<Gender>().FirstOrDefault(g => g.Id == data.Id);
+            Examiner examiner = db.GetTable<Examiner>().FirstOrDefault(e=> e.Id == data.Id);
 
-            if (gender != null)
+            if (examiner != null)
             {
-                gender = data;
+                examiner = data;
                 db.SubmitChanges();
             }
         }
@@ -40,14 +40,14 @@ namespace DAL.DAO.Models
         public void Delete(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().DeleteOnSubmit(db.GetTable<Gender>().FirstOrDefault(g => g.Id == id));
+            db.GetTable<Examiner>().DeleteOnSubmit(db.GetTable<Examiner>().FirstOrDefault(e => e.Id == id));
             db.SubmitChanges();
         }
 
-        public IEnumerable<Gender> ReadAll()
+        public IEnumerable<Examiner> ReadAll()
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().ToList();
+            return db.GetTable<Examiner>().ToList();
         }
     }
 }

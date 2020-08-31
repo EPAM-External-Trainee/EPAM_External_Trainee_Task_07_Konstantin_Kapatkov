@@ -1,38 +1,41 @@
 ﻿using DAL.DAO.Interfaces;
 using DAL.ORM.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
-    public class DaoGender : IDao<Gender>
+    public class DaoStudent : IDao<Student>
     {
         private readonly string _connectionString;
 
-        public DaoGender(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
+        public DaoStudent(string connectionString) => _connectionString = connectionString;
 
-        public void Create(Gender data)
+        public void Create(Student data)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().InsertOnSubmit(data);
+            db.GetTable<Student>().InsertOnSubmit(data);
             db.SubmitChanges();
         }
 
-        public Gender Read(int id)
+        public Student Read(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().FirstOrDefault(g => g.Id == id);
+            return db.GetTable<Student>().FirstOrDefault(s => s.Id == id);
         }
 
-        public void Update(Gender data)
+        public void Update(Student data)
         {
             using DataContext db = new DataContext(_connectionString);
-            Gender gender = db.GetTable<Gender>().FirstOrDefault(g => g.Id == data.Id);
+            Student student = db.GetTable<Student>().FirstOrDefault(s => s.Id == data.Id);
 
-            if (gender != null)
+            if (student != null)
             {
-                gender = data;
+                student = data;
                 db.SubmitChanges();
             }
         }
@@ -40,14 +43,14 @@ namespace DAL.DAO.Models
         public void Delete(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().DeleteOnSubmit(db.GetTable<Gender>().FirstOrDefault(g => g.Id == id));
+            db.GetTable<Student>().DeleteOnSubmit(db.GetTable<Student>().FirstOrDefault(s => s.Id == id));
             db.SubmitChanges();
         }
 
-        public IEnumerable<Gender> ReadAll()
+        public IEnumerable<Student> ReadAll()
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().ToList();
+            return db.GetTable<Student>().ToList();
         }
     }
 }

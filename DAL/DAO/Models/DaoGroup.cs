@@ -6,33 +6,33 @@ using System.Linq;
 
 namespace DAL.DAO.Models
 {
-    public class DaoGender : IDao<Gender>
+    public class DaoGroup : IDao<Group>
     {
         private readonly string _connectionString;
 
-        public DaoGender(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
+        public DaoGroup(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;") => _connectionString = connectionString;
 
-        public void Create(Gender data)
+        public void Create(Group data)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().InsertOnSubmit(data);
+            db.GetTable<Group>().InsertOnSubmit(data);
             db.SubmitChanges();
         }
 
-        public Gender Read(int id)
+        public Group Read(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().FirstOrDefault(g => g.Id == id);
+            return db.GetTable<Group>().FirstOrDefault(g => g.Id == id);
         }
 
-        public void Update(Gender data)
+        public void Update(Group data)
         {
             using DataContext db = new DataContext(_connectionString);
-            Gender gender = db.GetTable<Gender>().FirstOrDefault(g => g.Id == data.Id);
+            Group group = db.GetTable<Group>().FirstOrDefault(g => g.Id == data.Id);
 
-            if (gender != null)
+            if (group != null)
             {
-                gender = data;
+                group = data;
                 db.SubmitChanges();
             }
         }
@@ -40,14 +40,14 @@ namespace DAL.DAO.Models
         public void Delete(int id)
         {
             using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().DeleteOnSubmit(db.GetTable<Gender>().FirstOrDefault(g => g.Id == id));
+            db.GetTable<Group>().DeleteOnSubmit(db.GetTable<Group>().FirstOrDefault(g => g.Id == id));
             db.SubmitChanges();
         }
 
-        public IEnumerable<Gender> ReadAll()
+        public IEnumerable<Group> ReadAll()
         {
             using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().ToList();
+            return db.GetTable<Group>().ToList();
         }
     }
 }
