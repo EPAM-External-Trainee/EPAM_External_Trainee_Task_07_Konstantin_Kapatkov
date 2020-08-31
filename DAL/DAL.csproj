@@ -51,8 +51,10 @@
     <Compile Include="ORM\Interfaces\SessionInfo\ISession.cs" />
     <Compile Include="ORM\Interfaces\SessionInfo\ISessionResult.cs" />
     <Compile Include="ORM\Interfaces\SessionInfo\ISessionSchedule.cs" />
+    <Compile Include="ORM\Models\Examiner.cs" />
     <Compile Include="ORM\Models\Gender.cs" />
     <Compile Include="ORM\Models\Group.cs" />
+    <Compile Include="ORM\Models\GroupSpecialty.cs" />
     <Compile Include="ORM\Models\KnowledgeAssessmentForm.cs" />
     <Compile Include="ORM\Models\SessionInfo\Session.cs" />
     <Compile Include="ORM\Models\SessionInfo\SessionResult.cs" />
