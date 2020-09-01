@@ -4,7 +4,7 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
 {
     public struct ExaminersTableRawView : IExaminersTableRawView
     {
-        public ExaminersTableRawView(string examinerSurname, string examinerName, string examinerPatronymic, string averageAssessment)
+        public ExaminersTableRawView(string examinerSurname, string examinerName, string examinerPatronymic, double averageAssessment)
         {
             ExaminerSurname = examinerSurname;
             ExaminerName = examinerName;
@@ -18,7 +18,7 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
 
         public string ExaminerPatronymic { get; set; }
 
-        public string AverageAssessment { get; set; }
+        public double AverageAssessment { get; set; }
 
         public override bool Equals(object obj) => obj is ExaminersTableRawView view && ExaminerSurname == view.ExaminerSurname && ExaminerName == view.ExaminerName && ExaminerPatronymic == view.ExaminerPatronymic && AverageAssessment == view.AverageAssessment;
 

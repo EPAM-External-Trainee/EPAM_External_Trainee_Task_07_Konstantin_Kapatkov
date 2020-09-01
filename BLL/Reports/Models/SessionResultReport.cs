@@ -29,16 +29,15 @@ namespace BLL.Reports.Models
 
         private IEnumerable<GroupSpecialtyTableRawView> GetGroupSpecialtyTableRawsData(int sessionId)
         {
-            List<GroupSpecialtyTableRawView> result = new List<GroupSpecialtyTableRawView>();
-
             var sessionSpecialities = from g in Groups
                                       join st in Students on g.Id equals st.Id
                                       join sr in SessionResults on st.Id equals sr.StudentId
                                       join gs in GroupSpecialties on g.GroupSpecialtyId equals gs.Id
                                       select gs.Name;
 
+            List<GroupSpecialtyTableRawView> result = new List<GroupSpecialtyTableRawView>();
             List<double> assessments = new List<double>();
-            foreach (string specialty in sessionSpecialities.Distinct())
+            foreach (var specialty in sessionSpecialities.Distinct())
             {
                 assessments.AddRange(from g in Groups
                                      join st in Students on g.Id equals st.GroupId
@@ -56,15 +55,32 @@ namespace BLL.Reports.Models
 
         private IEnumerable<ExaminersTableRawView> GetExaminersTableRawsData(int sessionId)
         {
+            var sessionExaminers = from ss in SessionSchedules
+                                   join ex in Examiners on ss.ExaminerId equals ex.Id
+                                   where ss.SessionId == sessionId
+                                   select ex;
+
+
             List<ExaminersTableRawView> result = new List<ExaminersTableRawView>();
+            List<double> examinerAssessmnets = new List<double>();
+            foreach (var examiner in sessionExaminers.Distinct())
+            {
+                examinerAssessmnets.AddRange(from g in Groups
+                                             join st in Students on g.Id equals st.Id
+                                             join sr in SessionResults on st.Id equals sr.StudentId
+                                             join ss in SessionSchedules on g.Id equals ss.GroupId
+                                             join ex in Examiners on ss.ExaminerId equals ex.Id
+                                             where ss.KnowledgeAssessmentFormId == 1 && ex.Name == examiner.Name && ss.SubjectId == sr.SubjectId
+                                             select double.Parse(sr.Assessment));
 
-
-
+                result.Add(new ExaminersTableRawView(examiner.Surname, examiner.Name, examiner.Patronymic, Math.Round(examinerAssessmnets.Average(), 2)));
+                examinerAssessmnets.Clear();
+            }
 
             return result;
         }
 
-        private string GetSessionInfo(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId)?.ToString();
+        private string GetSessionInfo(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId).Name;
 
         public SessionResultReportData GetSessionResultReportData(int sessionId)
         {

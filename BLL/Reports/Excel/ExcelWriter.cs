@@ -108,45 +108,36 @@ namespace BLL.Reports.Excel
             }
 
             SetBorder(excel, workSheet, "Specialty marks");
-
         }
 
-        //private static void WriteExaminersTable(IEnumerable<SessionResultReportData> dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
-        //{
-        //    foreach (var data in dataToWrite)
-        //    {
-        //        int currentRow = 1;
-        //        workSheet = excel.Workbook.Worksheets.Add(data.GroupName);
+        private static void WriteExaminersTable(SessionResultReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        {
+            int currentRow = 1;
+            workSheet = excel.Workbook.Worksheets.Add("Examiner marks");
 
-        //        SetWorkSheetStyle(workSheet);
-        //        SetRowStyle(workSheet.Row(currentRow));
+            SetWorkSheetStyle(workSheet);
+            SetRowStyle(workSheet.Row(currentRow));
 
-        //        workSheet.Cells[currentRow, currentRow].Value = data.SessionInfo;
-        //        workSheet.Cells[currentRow, currentRow, currentRow, HeadersForExaminersTable.Length].Merge = true;
+            workSheet.Cells[currentRow, currentRow].Value = "Average mark for each examiner";
+            workSheet.Cells[currentRow, currentRow, currentRow, HeadersForExaminersTable.Length].Merge = true;
 
-        //        SetRowStyle(workSheet.Row(++currentRow));
+            SetRowStyle(workSheet.Row(++currentRow));
 
-        //        workSheet.Cells[currentRow, currentRow].Value = data.SessionInfo;
-        //        workSheet.Cells[currentRow, currentRow, currentRow, HeadersForExaminersTable.Length].Merge = true;
+            for (int i = 0; i < HeadersForExaminersTable.Length; i++)
+            {
+                workSheet.Cells[currentRow, ++i].Value = HeadersForExaminersTable[--i];
+            }
 
-        //        SetRowStyle(workSheet.Row(++currentRow));
+            for (int i = ++currentRow, j = 0; j < dataToWrite.ExaminersTableRawViews.Count(); i++, j++)
+            {
+                workSheet.Cells[i, 1].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerSurname;
+                workSheet.Cells[i, 2].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerName;
+                workSheet.Cells[i, 3].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerPatronymic;
+                workSheet.Cells[i, 4].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].AverageAssessment;
+            }
 
-        //        for (int i = 0; i < HeadersForExaminersTable.Length; i++)
-        //        {
-        //            workSheet.Cells[currentRow, ++i].Value = HeadersForExaminersTable[--i];
-        //        }
-
-        //        for (int i = ++currentRow, j = 0; j < data.ExaminersTableRawViews.Count(); i++, j++)
-        //        {
-        //            workSheet.Cells[i, 1].Value = data.ExaminersTableRawViews.ToList()[j].ExaminerSurname;
-        //            workSheet.Cells[i, 2].Value = data.ExaminersTableRawViews.ToList()[j].ExaminerName;
-        //            workSheet.Cells[i, 3].Value = data.ExaminersTableRawViews.ToList()[j].ExaminerPatronymic;
-        //            workSheet.Cells[i, 4].Value = data.ExaminersTableRawViews.ToList()[j].AverageAssessment;
-        //        }
-
-        //        SetBorder(excel, workSheet, data.GroupName);
-        //    }
-        //}
+            SetBorder(excel, workSheet, "Examiner marks");
+        }
 
         public static void WriteToExcel(SessionResultReportData dataToWrite, string filePath)
         {
@@ -156,7 +147,7 @@ namespace BLL.Reports.Excel
 
             WriteGroupTable(dataToWrite, excel, workSheet);
             WriteGroupSpecialtyTable(dataToWrite, excel, workSheet);
-            //WriteExaminersTable(dataToWrite, excel, workSheet);
+            WriteExaminersTable(dataToWrite, excel, workSheet);
 
             FileStream objFileStrm = File.Create(filePath);
             objFileStrm.Close();
