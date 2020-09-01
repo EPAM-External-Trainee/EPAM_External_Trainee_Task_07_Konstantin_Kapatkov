@@ -5,11 +5,9 @@ namespace BLL.Reports.Interfaces.SessionResultReport
 {
     public interface ISessionResultReportData
     {
-        IEnumerable<GroupTableRawView> GroupTableRawViews { get; set; }
+        Dictionary<string, List<GroupTableRawView>> GroupTableRawViews { get; set; }
 
         string SessionInfo { get; set; }
-
-        string GroupName { get; set; }
 
         IEnumerable<GroupSpecialtyTableRawView> GroupSpecialtyTableRawViews { get; set; }
 

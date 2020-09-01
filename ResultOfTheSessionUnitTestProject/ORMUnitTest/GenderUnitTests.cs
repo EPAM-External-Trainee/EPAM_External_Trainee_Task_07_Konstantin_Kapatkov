@@ -13,26 +13,26 @@ namespace ResultOfTheSessionUnitTestProject
         public void CreateGender_Test()
         {
             Gender gender = new Gender("Unknown");
-            daoFactory.GetGender().Create(gender);
+            daoFactory.GetDaoGender().Create(gender);
         }
 
         [TestMethod]
         public void ReadGender_Test()
         {
-            Gender gender = daoFactory.GetGender().Read(1);
+            Gender gender = daoFactory.GetDaoGender().Read(1);
         }
 
         [TestMethod]
         public void UpdateGender_Test()
         {
             Gender gender = new Gender(3, "NewUnknown");
-            daoFactory.GetGender().Update(gender);
+            daoFactory.GetDaoGender().Update(gender);
         }
 
         [TestMethod]
         public void DeleteGender_Test()
         {
-            daoFactory.GetGender().Delete(4);
+            daoFactory.GetDaoGender().Delete(4);
         }
     }
 }
