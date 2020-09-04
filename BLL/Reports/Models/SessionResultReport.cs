@@ -87,8 +87,50 @@ namespace BLL.Reports.Models
             Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
             {
-                groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId).Name, GetGroupTableRowsData(sessionId, groupId).ToList());
+                groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).ToList());
             }
+            return new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId));
+        }
+
+        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder = false)
+        {
+            Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
+            foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
+            {
+                groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).ToList());
+            }
+
+            return isDescOrder ? new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId).OrderByDescending(predicate))
+                : new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId).OrderBy(predicate));
+        }
+
+        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<GroupSpecialtyTableRawView, object> predicate, bool isDescOrder = false)
+        {
+            Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
+            foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
+            {
+                groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).ToList());
+            }
+
+            return isDescOrder ? new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId).OrderByDescending(predicate), GetExaminersTableRawsData(sessionId))
+                : new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate), GetExaminersTableRawsData(sessionId));
+        }
+
+        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder = false)
+        {
+            Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
+            foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
+            {
+                if (isDescOrder)
+                {
+                    groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).OrderByDescending(predicate).ToList());
+                }
+                else
+                {
+                    groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).OrderBy(predicate).ToList());
+                }
+            }
+
             return new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId));
         }
     }

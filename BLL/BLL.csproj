@@ -57,10 +57,13 @@
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReportData.cs" />
+    <Compile Include="Reports\Models\DynamicChangesInAverageMarkReport.cs" />
     <Compile Include="Reports\Models\SessionResultReport.cs" />
+    <Compile Include="Reports\Structs\ExcelTableRawViews\DynamicChangesInAverageMark\TableRowView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\ExaminersTableRawView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupTableRawView.cs" />
+    <Compile Include="Reports\Structs\ReportData\DynamicChangesInAverageMarkReportData.cs" />
     <Compile Include="Reports\Structs\ReportData\SessionResultReportData.cs" />
   </ItemGroup>
   <ItemGroup>
