@@ -11,7 +11,7 @@ namespace BLL.Reports.Structs.ReportData
         {
         }
 
-        public SessionResultReportData(Dictionary<string, List<GroupTableRawView>> groupTableRawViews, string sessionInfo, IEnumerable<GroupSpecialtyTableRawView> groupSpecialtyTableRawViews, IEnumerable<ExaminersTableRawView> examinersTableRawViews)
+        public SessionResultReportData(Dictionary<string, IEnumerable<GroupTableRawView>> groupTableRawViews, string sessionInfo, IEnumerable<GroupSpecialtyTableRawView> groupSpecialtyTableRawViews, IEnumerable<ExaminersTableRawView> examinersTableRawViews)
         {
             GroupTableRawViews = groupTableRawViews;
             SessionInfo = sessionInfo;
@@ -19,7 +19,7 @@ namespace BLL.Reports.Structs.ReportData
             ExaminersTableRawViews = examinersTableRawViews;
         }
 
-        public Dictionary<string, List<GroupTableRawView>> GroupTableRawViews { get; set; }
+        public Dictionary<string, IEnumerable<GroupTableRawView>> GroupTableRawViews { get; set; }
 
         public IEnumerable<GroupSpecialtyTableRawView> GroupSpecialtyTableRawViews { get; set; }
 
