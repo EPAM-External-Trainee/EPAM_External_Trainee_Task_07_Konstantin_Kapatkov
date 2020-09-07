@@ -25,14 +25,14 @@ namespace ResultOfTheSessionUnitTestProject
         [TestMethod]
         public void UpdateGender_Test()
         {
-            Gender gender = new Gender(3, "NewUnknown");
+            Gender gender = new Gender(3, "NewUnknown2");
             daoFactory.GetDaoGender().Update(gender);
         }
 
         [TestMethod]
         public void DeleteGender_Test()
         {
-            daoFactory.GetDaoGender().Delete(4);
+            daoFactory.GetDaoGender().Delete(3);
         }
     }
 }

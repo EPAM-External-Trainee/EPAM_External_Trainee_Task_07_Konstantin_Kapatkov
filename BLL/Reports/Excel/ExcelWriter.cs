@@ -148,7 +148,7 @@ namespace BLL.Reports.Excel
             workSheet.DefaultColWidth = 25;
 
             workSheet.Cells[currentRow, currentRow].Value = "Dynamics of changes in the average assessment for each subject by year";
-            workSheet.Cells[currentRow, currentRow, currentRow++, dataToWrite.Years.Count() + 1].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow++, dataToWrite.AcademicYears.Count() + 1].Merge = true;
 
             for (int i = 0; i < HeadersForAssessmentDynamicChangesTable.Length; i++)
             {
@@ -165,9 +165,9 @@ namespace BLL.Reports.Excel
             workSheet.Cells[currentRow, currentRow, currentRow, currentRow + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             workSheet.Cells[currentRow, currentRow, currentRow, currentRow].Style.Font.Bold = true;
 
-            for (int i = currentRow, j = currentRow + 1, k = 0; k < dataToWrite.Years.Count(); i++, k++)
+            for (int i = currentRow, j = currentRow + 1, k = 0; k < dataToWrite.AcademicYears.Count(); i++, k++)
             {
-                workSheet.Cells[j, i].Value = dataToWrite.Years.ToList()[k];
+                workSheet.Cells[j, i].Value = dataToWrite.AcademicYears.ToList()[k];
                 workSheet.Cells[j, i].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 workSheet.Cells[j, i].Style.Font.Bold = true;
             }
@@ -175,9 +175,9 @@ namespace BLL.Reports.Excel
             for (int i = currentRow += 2, k = 0; k < dataToWrite.TableRowViews.Count(); i++, k++)
             {
                 workSheet.Cells[i, 1].Value = dataToWrite.TableRowViews.ToList()[k].SubjectName;
-                for (int j = 0, l = 2; j < dataToWrite.TableRowViews.ToList()[k].AvgAssessments.Count; j++, l++)
+                for (int j = 0, l = 2; j < dataToWrite.TableRowViews.ToList()[k].AvgAssessments.ToList().Count; j++, l++)
                 {
-                    workSheet.Cells[i, l].Value = dataToWrite.TableRowViews.ToList()[k].AvgAssessments[j];
+                    workSheet.Cells[i, l].Value = dataToWrite.TableRowViews.ToList()[k].AvgAssessments.ToList()[j] == -1 ? "" : (object)dataToWrite.TableRowViews.ToList()[k].AvgAssessments.ToList()[j];
                     workSheet.Cells[i, l].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
             }

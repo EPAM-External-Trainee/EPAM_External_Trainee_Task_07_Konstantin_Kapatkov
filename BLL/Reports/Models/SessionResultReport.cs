@@ -1,4 +1,5 @@
 ﻿using BLL.Reports.Abstract;
+using BLL.Reports.Interfaces.SessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
 using BLL.Reports.Structs.ReportData;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace BLL.Reports.Models
 {
-    public class SessionResultReport : Report
+    public class SessionResultReport : Report, ISessionResultReport
     {
         public SessionResultReport(string connectionString) : base(connectionString)
         {
@@ -82,7 +83,7 @@ namespace BLL.Reports.Models
 
         private string GetSessionInfo(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId).Name;
 
-        public SessionResultReportData GetSessionResultReportData(int sessionId)
+        public SessionResultReportData GetReportData(int sessionId)
         {
             Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
@@ -92,7 +93,7 @@ namespace BLL.Reports.Models
             return new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId));
         }
 
-        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder = false)
+        public SessionResultReportData GetReportData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder = false)
         {
             Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
@@ -104,7 +105,7 @@ namespace BLL.Reports.Models
                 : new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId).OrderBy(predicate));
         }
 
-        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<GroupSpecialtyTableRawView, object> predicate, bool isDescOrder = false)
+        public SessionResultReportData GetReportData(int sessionId, Func<GroupSpecialtyTableRawView, object> predicate, bool isDescOrder = false)
         {
             Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
@@ -116,7 +117,7 @@ namespace BLL.Reports.Models
                 : new SessionResultReportData(groupTableDictionary, GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate), GetExaminersTableRawsData(sessionId));
         }
 
-        public SessionResultReportData GetSessionResultReportData(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder = false)
+        public SessionResultReportData GetReportData(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder = false)
         {
             Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())

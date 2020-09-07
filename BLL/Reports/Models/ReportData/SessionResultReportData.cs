@@ -5,8 +5,12 @@ using System.Linq;
 
 namespace BLL.Reports.Structs.ReportData
 {
-    public struct SessionResultReportData : ISessionResultReportData
+    public class SessionResultReportData : ISessionResultReportData
     {
+        public SessionResultReportData()
+        {
+        }
+
         public SessionResultReportData(Dictionary<string, List<GroupTableRawView>> groupTableRawViews, string sessionInfo, IEnumerable<GroupSpecialtyTableRawView> groupSpecialtyTableRawViews, IEnumerable<ExaminersTableRawView> examinersTableRawViews)
         {
             GroupTableRawViews = groupTableRawViews;

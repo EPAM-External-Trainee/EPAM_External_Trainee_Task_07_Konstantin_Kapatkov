@@ -1,5 +1,4 @@
-﻿using System;
-using BLL.Reports.Abstract;
+﻿using BLL.Reports.Enums;
 using BLL.Reports.Excel;
 using BLL.Reports.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,8 +11,8 @@ namespace ResultOfTheSessionUnitTestProject.ReportsUnitTest
         [TestMethod]
         public void TestMethod()
         {
-            DynamicChangesInAverageMarkReport report = new DynamicChangesInAverageMarkReport(ConnectionString);
-            ExcelWriter.WriteToExcel(report.GetReportData(), PathToGroupSessionResultReportExcelFile);
+            AssessmentDynamicsReport report = new AssessmentDynamicsReport(ConnectionString);
+            ExcelWriter.WriteToExcel(report.GetReportData(AssessmentDynamicsReportOrderBy.AverageAssessment, false), PathToGroupSessionResultReportExcelFile);
         }
     }
 }

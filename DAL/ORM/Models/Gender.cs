@@ -1,4 +1,5 @@
 ﻿using ResultsOfTheSession.DAL.ORM.Interfaces;
+using System;
 using System.Data.Linq.Mapping;
 
 namespace DAL.ORM.Models

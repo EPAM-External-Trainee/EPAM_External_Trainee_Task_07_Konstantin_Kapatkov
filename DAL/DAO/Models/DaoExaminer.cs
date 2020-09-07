@@ -32,7 +32,9 @@ namespace DAL.DAO.Models
 
             if (examiner != null)
             {
-                examiner = data;
+                examiner.Name = data.Name;
+                examiner.Surname = data.Surname;
+                examiner.Patronymic = data.Patronymic;
                 db.SubmitChanges();
             }
         }

@@ -51,20 +51,25 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Abstract\Report.cs" />
+    <Compile Include="Reports\Enums\AssessmentDynamicsReportOrderBy.cs" />
     <Compile Include="Reports\Excel\ExcelWriter.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsReport.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsTableRowView.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IDynamicChangesInAverageMarkReportData.cs" />
     <Compile Include="Reports\Interfaces\IReport.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IExaminersTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTableRawView.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReport.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReportData.cs" />
-    <Compile Include="Reports\Models\DynamicChangesInAverageMarkReport.cs" />
+    <Compile Include="Reports\Models\AssessmentDynamicsReport.cs" />
     <Compile Include="Reports\Models\SessionResultReport.cs" />
-    <Compile Include="Reports\Structs\ExcelTableRawViews\DynamicChangesInAverageMark\TableRowView.cs" />
+    <Compile Include="Reports\Structs\ExcelTableRawViews\GroupSessionResultReport\AssessmentDynamicsTableRowView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\ExaminersTableRawView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupTableRawView.cs" />
-    <Compile Include="Reports\Structs\ReportData\DynamicChangesInAverageMarkReportData.cs" />
-    <Compile Include="Reports\Structs\ReportData\SessionResultReportData.cs" />
+    <Compile Include="Reports\Models\ReportData\DynamicChangesInAverageMarkReportData.cs" />
+    <Compile Include="Reports\Models\ReportData\SessionResultReportData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
