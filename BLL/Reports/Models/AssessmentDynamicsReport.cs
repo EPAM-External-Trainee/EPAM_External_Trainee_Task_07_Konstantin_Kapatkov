@@ -3,6 +3,7 @@ using BLL.Reports.Enums;
 using BLL.Reports.Interfaces.GroupSessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
 using BLL.Reports.Structs.ReportData;
+using DAL.ORM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +20,15 @@ namespace BLL.Reports.Models
         {
             List<AssessmentDynamicsTableRowView> result = new List<AssessmentDynamicsTableRowView>();
             List<string> years = GetYears().OrderBy(y => y).ToList();
-            List<string> subjects = GetSubjects(years).ToList();
+            List<Subject> subjects = GetSubjects(years).Distinct().ToList();
             List<double> subjectYearAssessments = new List<double>();
             List<double> subjectAvgAssessments = new List<double>();
 
-            foreach (string subject in subjects.Distinct())
+            foreach (var subject in subjects)
             {
                 foreach (string year in years)
                 {
-                    subjectYearAssessments.AddRange(GetSubjectYearAssessments(year, subject).OrderBy(a => a));
+                    subjectYearAssessments.AddRange(GetSubjectYearAssessments(year, subject.Id).OrderBy(a => a));
 
                     if (subjectYearAssessments.Count != 0)
                     {
@@ -43,7 +44,7 @@ namespace BLL.Reports.Models
 
                 if(subjectAvgAssessments.Count == years.Count)
                 {
-                    result.Add(new AssessmentDynamicsTableRowView(subject, new List<double>(subjectAvgAssessments.OrderBy(a => a))));
+                    result.Add(new AssessmentDynamicsTableRowView(subject.Name, new List<double>(subjectAvgAssessments.OrderBy(a => a))));
                 }
 
                 subjectAvgAssessments.Clear();
@@ -54,28 +55,33 @@ namespace BLL.Reports.Models
 
         private IEnumerable<string> GetYears() => Sessions.Select(s => s.AcademicYear);
 
-        private IEnumerable<string> GetSubjects(IEnumerable<string> years)
+        private IEnumerable<Subject> GetSubjects(string year)
         {
-            List<string> subjects = new List<string>();
+            return from sr in SessionResults
+                   join s in Subjects on sr.StudentId equals s.Id
+                   join ss in Sessions on sr.SessionId equals ss.Id
+                   join sesSched in SessionSchedules on s.Id equals sesSched.SubjectId
+                   where ss.AcademicYear == year && sesSched.KnowledgeAssessmentFormId == 1
+                   select s;
+        }
+
+        private IEnumerable<Subject> GetSubjects(IEnumerable<string> years)
+        {
+            List<Subject> subjects = new List<Subject>();
             foreach (var year in years)
             {
-                subjects.AddRange(from sr in SessionResults
-                                  join s in Subjects on sr.StudentId equals s.Id
-                                  join ss in Sessions on sr.SessionId equals ss.Id
-                                  join sesSched in SessionSchedules on s.Id equals sesSched.SubjectId
-                                  where ss.AcademicYear == year && sesSched.KnowledgeAssessmentFormId == 1
-                                  select s.Name);
+                subjects.AddRange(GetSubjects(year));
             }
             return subjects;
         }
 
-        private IEnumerable<double> GetSubjectYearAssessments(string year, string subjectName)
+        private IEnumerable<double> GetSubjectYearAssessments(string year, int subjectId)
         {
             return from sr in SessionResults
                    join s in Subjects on sr.SubjectId equals s.Id
                    join ss in Sessions on sr.SessionId equals ss.Id
                    join sesSched in SessionSchedules on s.Id equals sesSched.SubjectId
-                   where ss.AcademicYear == year && s.Name == subjectName && sesSched.KnowledgeAssessmentFormId == 1
+                   where ss.AcademicYear == year && s.Id == subjectId && sesSched.KnowledgeAssessmentFormId == 1
                    select double.Parse(sr.Assessment);
         }
 

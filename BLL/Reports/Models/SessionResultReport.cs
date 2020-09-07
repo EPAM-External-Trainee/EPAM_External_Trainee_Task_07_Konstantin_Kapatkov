@@ -15,7 +15,7 @@ namespace BLL.Reports.Models
         {
         }
 
-        private IEnumerable<string> GetGroupSpecialities(int sessionId)
+        private IEnumerable<GroupSpecialty> GetGroupSpecialities(int sessionId)
         {
             return from g in Groups
                    join st in Students on g.Id equals st.Id
@@ -23,7 +23,7 @@ namespace BLL.Reports.Models
                    join gs in GroupSpecialties on g.GroupSpecialtyId equals gs.Id
                    join ss in SessionSchedules on sessionId equals ss.SessionId
                    where ss.GroupId == g.Id
-                   select gs.Name;
+                   select gs;
         }
 
         private IEnumerable<Examiner> GetSessionExaminers(int sessionId)
@@ -57,34 +57,29 @@ namespace BLL.Reports.Models
                    select new GroupTableRawView(st.Name, st.Surname, st.Patronymic, s.Name, kaf.Form, ss.Date.ToShortDateString(), sr.Assessment);
         }
 
-        private IEnumerable<GroupTableRawView> GetGroupTableRowsData(int sessionId, int groupId)
-        {
-            List<GroupTableRawView> result = new List<GroupTableRawView>();
-            result.AddRange(GetGroupTableRawView(sessionId, groupId));
-            return result;
-        }
+        private IEnumerable<GroupTableRawView> GetGroupTableRowsData(int sessionId, int groupId) => GetGroupTableRawView(sessionId, groupId);
 
-        private IEnumerable<double> GetAssessments(int sessionId, string specialtyName)
+        private IEnumerable<double> GetAssessments(int sessionId, int specialtyId)
         {
             return from g in Groups
                    join st in Students on g.Id equals st.GroupId
                    join sr in SessionResults on st.Id equals sr.StudentId
                    join ss in SessionSchedules on st.GroupId equals ss.GroupId
                    join gs in GroupSpecialties on g.GroupSpecialtyId equals gs.Id
-                   where ss.SubjectId == sr.SubjectId && ss.KnowledgeAssessmentFormId == 1 && sr.SessionId == sessionId && gs.Name == specialtyName
+                   where ss.SubjectId == sr.SubjectId && ss.KnowledgeAssessmentFormId == 1 && sr.SessionId == sessionId && gs.Id == specialtyId
                    select double.Parse(sr.Assessment);
         }
 
         private IEnumerable<GroupSpecialtyTableRawView> GetGroupSpecialtyTableRawsData(int sessionId)
         {
-            IEnumerable<string> groupSpecialities = GetGroupSpecialities(sessionId).Distinct();
+            IEnumerable<GroupSpecialty> groupSpecialities = GetGroupSpecialities(sessionId).Distinct();
             List<GroupSpecialtyTableRawView> result = new List<GroupSpecialtyTableRawView>();
             List<double> assessments = new List<double>();
 
             foreach (var specialty in groupSpecialities)
             {
-                assessments.AddRange(GetAssessments(sessionId, specialty));
-                result.Add(new GroupSpecialtyTableRawView(specialty, Math.Round(assessments.Average(), 2)));
+                assessments.AddRange(GetAssessments(sessionId, specialty.Id));
+                result.Add(new GroupSpecialtyTableRawView(specialty.Name, Math.Round(assessments.Average(), 2)));
                 assessments.Clear();
             }
 
