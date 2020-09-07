@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BLL.Reports.Interfaces.GroupSessionResultReport
 {
-    public interface IDynamicChangesInAverageMarkReportData
+    public interface IAssessmentDynamicsReportData
     {
         IEnumerable<AssessmentDynamicsTableRowView> TableRowViews { get; set; }
 

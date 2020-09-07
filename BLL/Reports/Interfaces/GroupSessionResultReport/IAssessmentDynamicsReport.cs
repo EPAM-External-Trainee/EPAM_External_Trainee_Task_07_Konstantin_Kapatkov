@@ -5,8 +5,8 @@ namespace BLL.Reports.Interfaces.GroupSessionResultReport
 {
     public interface IAssessmentDynamicsReport
     {
-        DynamicChangesInAverageMarkReportData GetReportData();
+        AssessmentDynamicsReportData GetReportData();
 
-        DynamicChangesInAverageMarkReportData GetReportData(AssessmentDynamicsReportOrderBy orderBy, bool isDesc);
+        AssessmentDynamicsReportData GetReportData(AssessmentDynamicsReportOrderBy orderBy, bool isDesc);
     }
 }

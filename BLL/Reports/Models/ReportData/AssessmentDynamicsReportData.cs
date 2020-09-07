@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace BLL.Reports.Structs.ReportData
 {
-    public class DynamicChangesInAverageMarkReportData : IDynamicChangesInAverageMarkReportData
+    public class AssessmentDynamicsReportData : IAssessmentDynamicsReportData
     {
-        public DynamicChangesInAverageMarkReportData()
+        public AssessmentDynamicsReportData()
         {
         }
 
-        public DynamicChangesInAverageMarkReportData(IEnumerable<AssessmentDynamicsTableRowView> tableRowViews, IEnumerable<string> years)
+        public AssessmentDynamicsReportData(IEnumerable<AssessmentDynamicsTableRowView> tableRowViews, IEnumerable<string> years)
         {
             TableRowViews = tableRowViews;
             AcademicYears = years;

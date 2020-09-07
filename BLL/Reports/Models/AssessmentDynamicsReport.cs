@@ -79,22 +79,22 @@ namespace BLL.Reports.Models
                    select double.Parse(sr.Assessment);
         }
 
-        public DynamicChangesInAverageMarkReportData GetReportData() => new DynamicChangesInAverageMarkReportData(GetTableRowsData(), Sessions.Select(s => s.AcademicYear));
+        public AssessmentDynamicsReportData GetReportData() => new AssessmentDynamicsReportData(GetTableRowsData(), Sessions.Select(s => s.AcademicYear));
 
-        public DynamicChangesInAverageMarkReportData GetReportData(AssessmentDynamicsReportOrderBy orderBy, bool isDesc = false)
+        public AssessmentDynamicsReportData GetReportData(AssessmentDynamicsReportOrderBy orderBy, bool isDesc = false)
         {
             List<AssessmentDynamicsTableRowView> tableRowViewsData = GetTableRowsData().ToList();
             switch (orderBy)
             {
                 case AssessmentDynamicsReportOrderBy.Subject:
                     return isDesc
-                        ? new DynamicChangesInAverageMarkReportData(tableRowViewsData.OrderByDescending(d => d.SubjectName), GetYears())
-                        : new DynamicChangesInAverageMarkReportData(tableRowViewsData.OrderBy(d => d.SubjectName), GetYears());
+                        ? new AssessmentDynamicsReportData(tableRowViewsData.OrderByDescending(d => d.SubjectName), GetYears())
+                        : new AssessmentDynamicsReportData(tableRowViewsData.OrderBy(d => d.SubjectName), GetYears());
 
                 case AssessmentDynamicsReportOrderBy.AverageAssessment:
                     return isDesc
-                        ? new DynamicChangesInAverageMarkReportData(tableRowViewsData.OrderByDescending(d => d.AvgAssessments.Last()), GetYears())
-                        : new DynamicChangesInAverageMarkReportData(tableRowViewsData.OrderBy(d => d.AvgAssessments.Last()), GetYears());
+                        ? new AssessmentDynamicsReportData(tableRowViewsData.OrderByDescending(d => d.AvgAssessments.Last()), GetYears())
+                        : new AssessmentDynamicsReportData(tableRowViewsData.OrderBy(d => d.AvgAssessments.Last()), GetYears());
 
                 default: throw new NotImplementedException();
             }

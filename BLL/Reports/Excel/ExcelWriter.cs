@@ -138,7 +138,7 @@ namespace BLL.Reports.Excel
             SetBorder(excel, workSheet, "Examiner marks");
         }
 
-        private static void WriteAssessmentDynamicChangesTable(DynamicChangesInAverageMarkReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteAssessmentDynamicChangesTable(AssessmentDynamicsReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
             workSheet = excel.Workbook.Worksheets.Add("Assessment dynamics");
@@ -204,7 +204,7 @@ namespace BLL.Reports.Excel
             workSheet?.Dispose();
         }
 
-        public static void WriteToExcel(DynamicChangesInAverageMarkReportData dataToWrite, string filePath)
+        public static void WriteToExcel(AssessmentDynamicsReportData dataToWrite, string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
