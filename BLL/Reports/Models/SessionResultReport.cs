@@ -102,7 +102,7 @@ namespace BLL.Reports.Models
             return result;
         }
 
-        private string GetSessionInfo(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId).Name;
+        private string GetSessionInfo(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId)?.Name;
 
         private Dictionary<string, IEnumerable<GroupTableRawView>> GetGroupTableDictionary(int sessionId)
         {

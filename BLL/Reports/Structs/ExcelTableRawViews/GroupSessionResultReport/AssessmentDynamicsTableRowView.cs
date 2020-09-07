@@ -21,8 +21,8 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark
         public override int GetHashCode()
         {
             int hashCode = 625787162;
-            hashCode = hashCode * -1521134295 + SubjectName.GetHashCode();
-            hashCode = hashCode * -1521134295 + AvgAssessments.GetHashCode();
+            hashCode = (hashCode * -1521134295) + SubjectName.GetHashCode();
+            hashCode = (hashCode * -1521134295) + AvgAssessments.GetHashCode();
             return hashCode;
         }
     }

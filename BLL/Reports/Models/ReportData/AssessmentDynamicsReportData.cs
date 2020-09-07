@@ -26,8 +26,8 @@ namespace BLL.Reports.Structs.ReportData
         public override int GetHashCode()
         {
             int hashCode = -294578147;
-            hashCode = hashCode * -1521134295 + TableRowViews.GetHashCode();
-            hashCode = hashCode * -1521134295 + AcademicYears.GetHashCode();
+            hashCode = (hashCode * -1521134295) + TableRowViews.GetHashCode();
+            hashCode = (hashCode * -1521134295) + AcademicYears.GetHashCode();
             return hashCode;
         }
     }

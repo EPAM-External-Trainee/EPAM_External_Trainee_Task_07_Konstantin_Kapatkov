@@ -25,10 +25,10 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
         public override int GetHashCode()
         {
             int hashCode = -2129316878;
-            hashCode = hashCode * -1521134295 + ExaminerSurname.GetHashCode();
-            hashCode = hashCode * -1521134295 + ExaminerName.GetHashCode();
-            hashCode = hashCode * -1521134295 + ExaminerPatronymic.GetHashCode();
-            hashCode = hashCode * -1521134295 + AverageAssessment.GetHashCode();
+            hashCode = (hashCode * -1521134295) + ExaminerSurname.GetHashCode();
+            hashCode = (hashCode * -1521134295) + ExaminerName.GetHashCode();
+            hashCode = (hashCode * -1521134295) + ExaminerPatronymic.GetHashCode();
+            hashCode = (hashCode * -1521134295) + AverageAssessment.GetHashCode();
             return hashCode;
         }
     }

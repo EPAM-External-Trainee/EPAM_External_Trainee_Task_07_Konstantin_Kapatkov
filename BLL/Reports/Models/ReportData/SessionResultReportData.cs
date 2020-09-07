@@ -34,10 +34,10 @@ namespace BLL.Reports.Structs.ReportData
         public override int GetHashCode()
         {
             int hashCode = -1930975380;
-            hashCode = hashCode * -1521134295 + GroupTableRawViews.GetHashCode();
-            hashCode = hashCode * -1521134295 + SessionInfo.GetHashCode();
-            hashCode = hashCode * -1521134295 + GroupSpecialtyTableRawViews.GetHashCode();
-            hashCode = hashCode * -1521134295 + ExaminersTableRawViews.GetHashCode();
+            hashCode = (hashCode * -1521134295) + GroupTableRawViews.GetHashCode();
+            hashCode = (hashCode * -1521134295) + SessionInfo.GetHashCode();
+            hashCode = (hashCode * -1521134295) + GroupSpecialtyTableRawViews.GetHashCode();
+            hashCode = (hashCode * -1521134295) + ExaminersTableRawViews.GetHashCode();
             return hashCode;
         }
     }
