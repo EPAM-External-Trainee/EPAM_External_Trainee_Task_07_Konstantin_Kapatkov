@@ -28,7 +28,7 @@ namespace DAL.DAO.Models
         public void Update(Examiner data)
         {
             using DataContext db = new DataContext(_connectionString);
-            Examiner examiner = db.GetTable<Examiner>().FirstOrDefault(e=> e.Id == data.Id);
+            Examiner examiner = db.GetTable<Examiner>().FirstOrDefault(e => e.Id == data.Id);
 
             if (examiner != null)
             {

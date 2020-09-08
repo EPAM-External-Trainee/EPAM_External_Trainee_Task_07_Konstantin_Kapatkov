@@ -57,6 +57,7 @@
     <Compile Include="DAO\Models\DaoSessionSchedule.cs" />
     <Compile Include="DAO\Models\DaoStudent.cs" />
     <Compile Include="DAO\Models\DaoSubject.cs" />
+    <Compile Include="DB\DBDeployment\DatabaseDeployment.cs" />
     <Compile Include="ORM\Interfaces\IExaminer.cs" />
     <Compile Include="ORM\Interfaces\IGender.cs" />
     <Compile Include="ORM\Interfaces\IGroup.cs" />
@@ -81,10 +82,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DB\DBDeployment\03_CreatingRelationshipsBetweenTables.sql" />
-    <Content Include="DB\DBDeployment\01_DBCreation.sql" />
-    <Content Include="DB\DBDeployment\04_FillingInTables.sql" />
-    <Content Include="DB\DBDeployment\02_TablesCreation.sql" />
+    <Content Include="DB\SQLScript\03_CreatingRelationshipsBetweenTables.sql" />
+    <Content Include="DB\SQLScript\01_DBCreation.sql" />
+    <Content Include="DB\SQLScript\04_FillingInTables.sql" />
+    <Content Include="DB\SQLScript\02_TablesCreation.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
