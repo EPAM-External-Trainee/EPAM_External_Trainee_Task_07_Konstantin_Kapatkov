@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.DB.DBDeployment
 {
-    class DatabaseDeployment
+    public static class DatabaseDeployment
     {
+        public static void ExpandTheDatabase(string serverConnectionString)
+        {
+
+        }
     }
 }
