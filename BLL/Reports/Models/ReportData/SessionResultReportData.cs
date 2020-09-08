@@ -19,6 +19,12 @@ namespace BLL.Reports.Structs.ReportData
             ExaminersTableRawViews = examinersTableRawViews;
         }
 
+        public static readonly string[] HeadersForGroupTable = new string[] { "Surname", "Name", "Patronymic", "Subject", "Form", "Date", "Assessment" };
+
+        public static readonly string[] HeadersForGroupSpecialtyTable = new string[] { "Specialty", "Average assessment" };
+
+        public static readonly string[] HeadersForExaminersTable = new string[] { "Surname", "Name", "Patronymic", "Average assessment" };
+
         public Dictionary<string, IEnumerable<GroupTableRawView>> GroupTableRawViews { get; set; }
 
         public IEnumerable<GroupSpecialtyTableRawView> GroupSpecialtyTableRawViews { get; set; }

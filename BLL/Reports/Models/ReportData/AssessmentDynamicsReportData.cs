@@ -17,6 +17,8 @@ namespace BLL.Reports.Structs.ReportData
             AcademicYears = years;
         }
 
+        public static readonly string[] HeadersForAssessmentDynamicsTable = new string[] { "Subject", "Assessment" };
+
         public IEnumerable<AssessmentDynamicsTableRowView> TableRowViews { get; set; }
 
         public IEnumerable<string> AcademicYears { get; set; }

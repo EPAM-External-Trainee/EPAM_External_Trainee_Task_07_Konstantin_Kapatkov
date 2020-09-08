@@ -131,15 +131,7 @@ namespace BLL.Reports.Models
             return groupTableDictionary;
         }
 
-        public SessionResultReportData GetReportData(int sessionId)
-        {
-            Dictionary<string, List<GroupTableRawView>> groupTableDictionary = new Dictionary<string, List<GroupTableRawView>>();
-            foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
-            {
-                groupTableDictionary.Add(Groups.FirstOrDefault(g => g.Id == groupId)?.Name, GetGroupTableRowsData(sessionId, groupId).ToList());
-            }
-            return new SessionResultReportData(GetGroupTableDictionary(sessionId), GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId));
-        }
+        public SessionResultReportData GetReportData(int sessionId) => new SessionResultReportData(GetGroupTableDictionary(sessionId), GetSessionInfo(sessionId), GetGroupSpecialtyTableRawsData(sessionId), GetExaminersTableRawsData(sessionId));
 
         public SessionResultReportData GetReportData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder = false)
         {

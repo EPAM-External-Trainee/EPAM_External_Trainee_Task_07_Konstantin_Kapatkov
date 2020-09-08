@@ -9,14 +9,6 @@ namespace BLL.Reports.Excel
 {
     public static class ExcelWriter
     {
-        private static readonly string[] HeadersForGroupTable = new string[] { "Surname", "Name", "Patronymic", "Subject", "Form", "Date", "Assessment" };
-
-        private static readonly string[] HeadersForGroupSpecialtyTable = new string[] { "Specialty", "Average assessment" };
-
-        private static readonly string[] HeadersForExaminersTable = new string[] { "Surname", "Name", "Patronymic", "Average assessment" };
-
-        private static readonly string[] HeadersForAssessmentDynamicChangesTable = new string[] { "Subject", "Assessment" };
-
         private static void SetBorder(ExcelPackage excel, ExcelWorksheet workSheet, string workSheetName)
         {
             workSheet = excel.Workbook.Worksheets[workSheetName];
@@ -52,18 +44,18 @@ namespace BLL.Reports.Excel
                 SetRowStyle(workSheet.Row(currentRow));
 
                 workSheet.Cells[currentRow, currentRow].Value = dataToWrite.SessionInfo;
-                workSheet.Cells[currentRow, currentRow, currentRow, HeadersForGroupTable.Length].Merge = true;
+                workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupTable.Length].Merge = true;
 
                 SetRowStyle(workSheet.Row(++currentRow));
 
                 workSheet.Cells[currentRow, currentRow].Value = $"Group: {dataToWrite.GroupTableRawViews.ElementAt(i).Key}";
-                workSheet.Cells[currentRow, currentRow, currentRow, HeadersForGroupTable.Length].Merge = true;
+                workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupTable.Length].Merge = true;
 
                 SetRowStyle(workSheet.Row(++currentRow));
 
-                for (int k = 0; k < HeadersForGroupTable.Length; k++)
+                for (int k = 0; k < SessionResultReportData.HeadersForGroupTable.Length; k++)
                 {
-                    workSheet.Cells[currentRow, ++k].Value = HeadersForGroupTable[--k];
+                    workSheet.Cells[currentRow, ++k].Value = SessionResultReportData.HeadersForGroupTable[--k];
                 }
 
                 var tmp = dataToWrite.GroupTableRawViews.Values.ToList();
@@ -91,13 +83,13 @@ namespace BLL.Reports.Excel
             SetRowStyle(workSheet.Row(currentRow));
 
             workSheet.Cells[currentRow, currentRow].Value = "Average assessment for each specialty";
-            workSheet.Cells[currentRow, currentRow, currentRow, HeadersForGroupSpecialtyTable.Length].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupSpecialtyTable.Length].Merge = true;
 
             SetRowStyle(workSheet.Row(++currentRow));
 
-            for (int i = 0; i < HeadersForGroupSpecialtyTable.Length; i++)
+            for (int i = 0; i < SessionResultReportData.HeadersForGroupSpecialtyTable.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = HeadersForGroupSpecialtyTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = SessionResultReportData.HeadersForGroupSpecialtyTable[--i];
             }
 
             for (int i = ++currentRow, j = 0; j < dataToWrite.GroupSpecialtyTableRawViews.Count(); i++, j++)
@@ -118,13 +110,13 @@ namespace BLL.Reports.Excel
             SetRowStyle(workSheet.Row(currentRow));
 
             workSheet.Cells[currentRow, currentRow].Value = "Average assessment for each examiner";
-            workSheet.Cells[currentRow, currentRow, currentRow, HeadersForExaminersTable.Length].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForExaminersTable.Length].Merge = true;
 
             SetRowStyle(workSheet.Row(++currentRow));
 
-            for (int i = 0; i < HeadersForExaminersTable.Length; i++)
+            for (int i = 0; i < SessionResultReportData.HeadersForExaminersTable.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = HeadersForExaminersTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = SessionResultReportData.HeadersForExaminersTable[--i];
             }
 
             for (int i = ++currentRow, j = 0; j < dataToWrite.ExaminersTableRawViews.Count(); i++, j++)
@@ -138,7 +130,7 @@ namespace BLL.Reports.Excel
             SetBorder(excel, workSheet, "Examiner assessments");
         }
 
-        private static void WriteAssessmentDynamicChangesTable(AssessmentDynamicsReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteAssessmentDynamicsTable(AssessmentDynamicsReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
             workSheet = excel.Workbook.Worksheets.Add("Assessment dynamics");
@@ -150,9 +142,9 @@ namespace BLL.Reports.Excel
             workSheet.Cells[currentRow, currentRow].Value = "Dynamics of changes in the average assessment for each subject by year";
             workSheet.Cells[currentRow, currentRow, currentRow++, dataToWrite.AcademicYears.Count() + 1].Merge = true;
 
-            for (int i = 0; i < HeadersForAssessmentDynamicChangesTable.Length; i++)
+            for (int i = 0; i < AssessmentDynamicsReportData.HeadersForAssessmentDynamicsTable.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = HeadersForAssessmentDynamicChangesTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = AssessmentDynamicsReportData.HeadersForAssessmentDynamicsTable[--i];
             }
 
             workSheet.Cells[currentRow, currentRow - 1, currentRow + 1, currentRow - 1].Merge = true;
@@ -210,7 +202,7 @@ namespace BLL.Reports.Excel
             ExcelPackage excel = new ExcelPackage();
             ExcelWorksheet workSheet = null;
 
-            WriteAssessmentDynamicChangesTable(dataToWrite, excel, workSheet);
+            WriteAssessmentDynamicsTable(dataToWrite, excel, workSheet);
 
             FileStream objFileStrm = File.Create(filePath);
             objFileStrm?.Close();
