@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Interfaces
 {
     public interface IDao<T>
     {
-        void Create(T data);
+        Task<bool> TryCreateAsync(T data);
 
-        T Read(int id);
+        Task<T> TryReadAsync(int id);
 
-        void Update(T data);
+        Task<bool> TryUpdateAsync(T data);
 
-        void Delete(int id);
+        Task<bool> TryDeleteAsync(int id);
 
-        IEnumerable<T> ReadAll();
+        Task<IEnumerable<T>> TryReadAllAsync();
     }
 }

@@ -1,6 +1,10 @@
-﻿using BLL.Reports.Structs.ReportData;
+﻿using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
+using BLL.Reports.ExcelViews.ReportViews;
+using BLL.Reports.ExcelViews.SessionResultReport.TableView;
+using BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -33,48 +37,47 @@ namespace BLL.Reports.Excel
             row.Style.Font.Bold = true;
         }
 
-        private static void WriteGroupTable(SessionResultReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteGroupTable(IEnumerable<GroupTableView> dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
-            for(int i = 0; i < dataToWrite.GroupTableRawViews.Count; i++)
+            foreach (var groupTableView in dataToWrite)
             {
                 int currentRow = 1;
-                workSheet = excel.Workbook.Worksheets.Add(dataToWrite.GroupTableRawViews.ElementAt(i).Key);
+                workSheet = excel.Workbook.Worksheets.Add(groupTableView.GroupName);
 
                 SetWorkSheetStyle(workSheet);
                 SetRowStyle(workSheet.Row(currentRow));
 
-                workSheet.Cells[currentRow, currentRow].Value = dataToWrite.SessionInfo;
-                workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupTable.Length].Merge = true;
+                workSheet.Cells[currentRow, currentRow].Value = groupTableView.SessionName;
+                workSheet.Cells[currentRow, currentRow, currentRow, groupTableView.Headers.Length].Merge = true;
 
                 SetRowStyle(workSheet.Row(++currentRow));
 
-                workSheet.Cells[currentRow, currentRow].Value = $"Group: {dataToWrite.GroupTableRawViews.ElementAt(i).Key}";
-                workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupTable.Length].Merge = true;
+                workSheet.Cells[currentRow, currentRow].Value = $"Group: {groupTableView.GroupName}";
+                workSheet.Cells[currentRow, currentRow, currentRow, groupTableView.Headers.Length].Merge = true;
 
                 SetRowStyle(workSheet.Row(++currentRow));
 
-                for (int k = 0; k < SessionResultReportData.HeadersForGroupTable.Length; k++)
+                for (int i = 0; i < groupTableView.Headers.Length; i++)
                 {
-                    workSheet.Cells[currentRow, ++k].Value = SessionResultReportData.HeadersForGroupTable[--k];
+                    workSheet.Cells[currentRow, ++i].Value = groupTableView.Headers[--i];
                 }
 
-                var tmp = dataToWrite.GroupTableRawViews.Values.ToList();
-                for (int m = ++currentRow, j = 0; j < tmp[i].ToList().Count; j++, m++)
+                for (int i = ++currentRow, j = 0; j < groupTableView.TableRawViews.Count(); i++, j++)
                 {
-                    workSheet.Cells[m, 1].Value = tmp[i].ToList()[j].Surname;
-                    workSheet.Cells[m, 2].Value = tmp[i].ToList()[j].Name;
-                    workSheet.Cells[m, 3].Value = tmp[i].ToList()[j].Patronymic;
-                    workSheet.Cells[m, 4].Value = tmp[i].ToList()[j].Subject;
-                    workSheet.Cells[m, 5].Value = tmp[i].ToList()[j].Form;
-                    workSheet.Cells[m, 6].Value = tmp[i].ToList()[j].Date;
-                    workSheet.Cells[m, 7].Value = tmp[i].ToList()[j].Assessment;
+                    workSheet.Cells[i, 1].Value = groupTableView.TableRawViews.ToList()[j].Surname;
+                    workSheet.Cells[i, 2].Value = groupTableView.TableRawViews.ToList()[j].Name;
+                    workSheet.Cells[i, 3].Value = groupTableView.TableRawViews.ToList()[j].Patronymic;
+                    workSheet.Cells[i, 4].Value = groupTableView.TableRawViews.ToList()[j].Subject;
+                    workSheet.Cells[i, 5].Value = groupTableView.TableRawViews.ToList()[j].Form;
+                    workSheet.Cells[i, 6].Value = groupTableView.TableRawViews.ToList()[j].Date;
+                    workSheet.Cells[i, 7].Value = groupTableView.TableRawViews.ToList()[j].Assessment;
                 }
 
-                SetBorder(excel, workSheet, dataToWrite.GroupTableRawViews.ElementAt(i).Key);
+                SetBorder(excel, workSheet, groupTableView.GroupName);
             }
         }
 
-        private static void WriteGroupSpecialtyTable(SessionResultReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteSpecialtyAssessmetsTable(SpecialtyAssessmetsTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
             workSheet = excel.Workbook.Worksheets.Add("Specialty assessments");
@@ -83,25 +86,25 @@ namespace BLL.Reports.Excel
             SetRowStyle(workSheet.Row(currentRow));
 
             workSheet.Cells[currentRow, currentRow].Value = "Average assessment for each specialty";
-            workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForGroupSpecialtyTable.Length].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow, dataToWrite.Headers.Length].Merge = true;
 
             SetRowStyle(workSheet.Row(++currentRow));
 
-            for (int i = 0; i < SessionResultReportData.HeadersForGroupSpecialtyTable.Length; i++)
+            for (int i = 0; i < dataToWrite.Headers.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = SessionResultReportData.HeadersForGroupSpecialtyTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = dataToWrite.Headers[--i];
             }
 
-            for (int i = ++currentRow, j = 0; j < dataToWrite.GroupSpecialtyTableRawViews.Count(); i++, j++)
+            for (int i = ++currentRow, j = 0; j < dataToWrite.TableRawViews.Count(); i++, j++)
             {
-                workSheet.Cells[i, 1].Value = dataToWrite.GroupSpecialtyTableRawViews.ToList()[j].SpecialityName;
-                workSheet.Cells[i, 2].Value = dataToWrite.GroupSpecialtyTableRawViews.ToList()[j].AverageAssessment;
+                workSheet.Cells[i, 1].Value = dataToWrite.TableRawViews.ToList()[j].SpecialityName;
+                workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].AverageAssessment;
             }
 
             SetBorder(excel, workSheet, "Specialty assessments");
         }
 
-        private static void WriteExaminersTable(SessionResultReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteExaminersTable(ExaminersTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
             workSheet = excel.Workbook.Worksheets.Add("Examiner assessments");
@@ -110,27 +113,27 @@ namespace BLL.Reports.Excel
             SetRowStyle(workSheet.Row(currentRow));
 
             workSheet.Cells[currentRow, currentRow].Value = "Average assessment for each examiner";
-            workSheet.Cells[currentRow, currentRow, currentRow, SessionResultReportData.HeadersForExaminersTable.Length].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow, dataToWrite.Headers.Length].Merge = true;
 
             SetRowStyle(workSheet.Row(++currentRow));
 
-            for (int i = 0; i < SessionResultReportData.HeadersForExaminersTable.Length; i++)
+            for (int i = 0; i < dataToWrite.Headers.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = SessionResultReportData.HeadersForExaminersTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = dataToWrite.Headers[--i];
             }
 
-            for (int i = ++currentRow, j = 0; j < dataToWrite.ExaminersTableRawViews.Count(); i++, j++)
+            for (int i = ++currentRow, j = 0; j < dataToWrite.TableRawViews.Count(); i++, j++)
             {
-                workSheet.Cells[i, 1].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerSurname;
-                workSheet.Cells[i, 2].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerName;
-                workSheet.Cells[i, 3].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].ExaminerPatronymic;
-                workSheet.Cells[i, 4].Value = dataToWrite.ExaminersTableRawViews.ToList()[j].AverageAssessment;
+                workSheet.Cells[i, 1].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerSurname;
+                workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerName;
+                workSheet.Cells[i, 3].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerPatronymic;
+                workSheet.Cells[i, 4].Value = dataToWrite.TableRawViews.ToList()[j].AverageAssessment;
             }
 
             SetBorder(excel, workSheet, "Examiner assessments");
         }
 
-        private static void WriteAssessmentDynamicsTable(AssessmentDynamicsReportData dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        private static void WriteAssessmentDynamicsTable(AssessmentDynamicsTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
             workSheet = excel.Workbook.Worksheets.Add("Assessment dynamics");
@@ -142,9 +145,9 @@ namespace BLL.Reports.Excel
             workSheet.Cells[currentRow, currentRow].Value = "Dynamics of changes in the average assessment for each subject by year";
             workSheet.Cells[currentRow, currentRow, currentRow++, dataToWrite.AcademicYears.Count() + 1].Merge = true;
 
-            for (int i = 0; i < AssessmentDynamicsReportData.HeadersForAssessmentDynamicsTable.Length; i++)
+            for (int i = 0; i < dataToWrite.Headers.Length; i++)
             {
-                workSheet.Cells[currentRow, ++i].Value = AssessmentDynamicsReportData.HeadersForAssessmentDynamicsTable[--i];
+                workSheet.Cells[currentRow, ++i].Value = dataToWrite.Headers[--i];
             }
 
             workSheet.Cells[currentRow, currentRow - 1, currentRow + 1, currentRow - 1].Merge = true;
@@ -177,36 +180,67 @@ namespace BLL.Reports.Excel
             SetBorder(excel, workSheet, "Assessment dynamics");
         }
 
-        public static void WriteToExcel(SessionResultReportData dataToWrite, string filePath)
+        private static void WriteGroupSessionResultTable(IEnumerable<GroupSessionResultTableView> dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
+        {
+            foreach (var table in dataToWrite)
+            {
+                int currentRow = 1;
+                workSheet = excel.Workbook.Worksheets.Add(table.AcademicYear);
+
+                SetWorkSheetStyle(workSheet);
+                SetRowStyle(workSheet.Row(currentRow));
+
+                workSheet.Cells[currentRow, currentRow].Value = table.SessionName;
+                workSheet.Cells[currentRow, currentRow, currentRow, table.Headers.Length].Merge = true;
+
+                SetRowStyle(workSheet.Row(++currentRow));
+
+                for (int j = 0; j < table.Headers.Length; j++)
+                {
+                    workSheet.Cells[currentRow, ++j].Value = table.Headers[--j];
+                }
+
+                for (int k = ++currentRow, j = 0; j < table.TableRowViews.Count(); k++, j++)
+                {
+                    workSheet.Cells[k, 1].Value = table.TableRowViews.ToList()[j].GroupName;
+                    workSheet.Cells[k, 2].Value = table.TableRowViews.ToList()[j].MaxAssessment;
+                    workSheet.Cells[k, 3].Value = table.TableRowViews.ToList()[j].MinAssessment;
+                    workSheet.Cells[k, 4].Value = table.TableRowViews.ToList()[j].AvgAssessment;
+                }
+
+                SetBorder(excel, workSheet, table.AcademicYear);
+            }
+        }
+
+        public static void WriteToExcel(SessionResultReportView dataToWrite, string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
             ExcelWorksheet workSheet = null;
 
-            WriteGroupTable(dataToWrite, excel, workSheet);
-            WriteGroupSpecialtyTable(dataToWrite, excel, workSheet);
-            WriteExaminersTable(dataToWrite, excel, workSheet);
+            WriteGroupTable(dataToWrite.GroupTables, excel, workSheet);
+            WriteSpecialtyAssessmetsTable(dataToWrite.SpecialtyAssessmetsTable, excel, workSheet);
+            WriteExaminersTable(dataToWrite.ExaminersTable, excel, workSheet);
 
-            FileStream objFileStrm = File.Create(filePath);
+            using FileStream objFileStrm = File.Create(filePath);
             objFileStrm?.Close();
-            objFileStrm?.Dispose();
             File.WriteAllBytes(filePath, excel.GetAsByteArray());
 
             excel?.Dispose();
             workSheet?.Dispose();
         }
 
-        public static void WriteToExcel(AssessmentDynamicsReportData dataToWrite, string filePath)
+        public static void WriteToExcel(GroupSessionResultReportView dataToWrite, string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
             ExcelWorksheet workSheet = null;
 
-            WriteAssessmentDynamicsTable(dataToWrite, excel, workSheet);
+            WriteGroupSessionResultTable(dataToWrite.GroupSessionResultTables, excel, workSheet);
+            WriteAssessmentDynamicsTable(dataToWrite.AssessmentDynamicsTable, excel, workSheet);
 
-            FileStream objFileStrm = File.Create(filePath);
+            using FileStream objFileStrm = File.Create(filePath);
             objFileStrm?.Close();
-            objFileStrm?.Dispose();
             File.WriteAllBytes(filePath, excel.GetAsByteArray());
 
             excel?.Dispose();

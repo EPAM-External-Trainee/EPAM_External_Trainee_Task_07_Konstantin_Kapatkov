@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus, Version=5.3.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
@@ -50,26 +52,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Abstract\Report.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableView\ExaminersTableView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableView\GroupTableView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableView\SpecialtyAssessmetsTableView.cs" />
+    <Compile Include="Reports\Models\Abstract\Report.cs" />
     <Compile Include="Reports\Enums\AssessmentDynamicsReportOrderBy.cs" />
+    <Compile Include="Reports\ExcelViews\GroupSessionResultReport\TableView\AssessmentDynamicsTableView.cs" />
+    <Compile Include="Reports\ExcelViews\GroupSessionResultReport\ReportDataView\GroupSessionResultReportView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\ReportDataView\SessionResultReportView.cs" />
     <Compile Include="Reports\Excel\ExcelWriter.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsReport.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsTableRowView.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsReportData.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultReportData.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultTableRawView.cs" />
     <Compile Include="Reports\Interfaces\IReport.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IExaminersTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReport.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReportData.cs" />
-    <Compile Include="Reports\Models\AssessmentDynamicsReport.cs" />
-    <Compile Include="Reports\Models\SessionResultReport.cs" />
-    <Compile Include="Reports\Structs\ExcelTableRawViews\GroupSessionResultReport\AssessmentDynamicsTableRowView.cs" />
-    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\ExaminersTableRawView.cs" />
-    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupSpecialtyTableRawView.cs" />
-    <Compile Include="Reports\Structs\ExcelTableRawViews\SessionResultReport\GroupTableRawView.cs" />
-    <Compile Include="Reports\Models\ReportData\AssessmentDynamicsReportData.cs" />
-    <Compile Include="Reports\Models\ReportData\SessionResultReportData.cs" />
+    <Compile Include="Reports\Models\GroupSessionResultReportData\Tables\AssessmentDynamicsTable.cs" />
+    <Compile Include="Reports\Models\GroupSessionResultReportData\Tables\GroupSessionResultTable.cs" />
+    <Compile Include="Reports\Models\GroupSessionResultReportData\GroupSessionResultReport.cs" />
+    <Compile Include="Reports\Models\SessionResultReportData\SessionResultReport.cs" />
+    <Compile Include="Reports\ExcelViews\GroupSessionResultReport\TableRawViews\AssessmentDynamicsTableRowView.cs" />
+    <Compile Include="Reports\ExcelViews\GroupSessionResultReport\TableRawViews\GroupSessionResultTableRawView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableRawViews\ExaminersTableRawView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableRawViews\GroupSpecialtyTableRawView.cs" />
+    <Compile Include="Reports\ExcelViews\SessionResultReport\TableRawViews\GroupTableRawView.cs" />
+    <Compile Include="Reports\ExcelViews\GroupSessionResultReport\TableView\GroupSessionResultTableView.cs" />
+    <Compile Include="Reports\Models\SessionResultReportData\Tables\ExaminersTable.cs" />
+    <Compile Include="Reports\Models\SessionResultReportData\Tables\GroupTable.cs" />
+    <Compile Include="Reports\Models\SessionResultReportData\Tables\SpecialtyAssessmetsTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -80,5 +95,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

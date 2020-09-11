@@ -12,7 +12,7 @@ namespace ResultOfTheSessionUnitTestProject
         public void SessionResultReport_Test()
         {
             SessionResultReport sessionResultForGroup = new SessionResultReport(ConnectionString);
-            ExcelWriter.WriteToExcel(sessionResultForGroup.GetReportData(1), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(sessionResultForGroup.GetReport(1), PathToSessionResultReportExcelFile);
         }
     }
 }

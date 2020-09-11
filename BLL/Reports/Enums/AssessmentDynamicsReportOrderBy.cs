@@ -1,4 +1,4 @@
 ﻿namespace BLL.Reports.Enums
 {
-    public enum AssessmentDynamicsReportOrderBy { Subject, AverageAssessment }
+    public enum AssessmentDynamicsTableOrderBy { Subject, AverageAssessment }
 }

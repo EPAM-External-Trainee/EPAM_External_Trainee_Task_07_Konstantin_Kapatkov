@@ -3,6 +3,7 @@ using DAL.ORM.Models;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -12,48 +13,82 @@ namespace DAL.DAO.Models
 
         public DaoStudent(string connectionString) => _connectionString = connectionString;
 
-        public void Create(Student data)
+        public async Task<bool> TryCreateAsync(Student data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Student>().InsertOnSubmit(data);
-            db.SubmitChanges();
-        }
-
-        public Student Read(int id)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Student>().FirstOrDefault(s => s.Id == id);
-        }
-
-        public void Update(Student data)
-        {
-            DataContext db = new DataContext(_connectionString);
-            Student student = db.GetTable<Student>().FirstOrDefault(s => s.Id == data.Id);
-
-            if (student != null)
+            try
             {
-                student.Name = data.Name;
-                student.Surname = data.Surname;
-                student.Patronymic = data.Patronymic;
-                student.Birthday = data.Birthday;
-                student.GenderId = data.GenderId;
-                student.GroupId = data.GroupId;
-                db.SubmitChanges();
-                db.Dispose();
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Student>().InsertOnSubmit(data); db.SubmitChanges();}).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void Delete(int id)
+        public async Task<Student> TryReadAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Student>().DeleteOnSubmit(db.GetTable<Student>().FirstOrDefault(s => s.Id == id));
-            db.SubmitChanges();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Student>().FirstOrDefault(s => s.Id == id)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public IEnumerable<Student> ReadAll()
+        public async Task<bool> TryUpdateAsync(Student data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Student>().ToList();
+            try
+            {
+                DataContext db = new DataContext(_connectionString);
+                await Task.Run(() =>
+                {
+                    Student student = db.GetTable<Student>().FirstOrDefault(s => s.Id == data.Id);
+                    student.Name = data.Name;
+                    student.Surname = data.Surname;
+                    student.Patronymic = data.Patronymic;
+                    student.Birthday = data.Birthday;
+                    student.GenderId = data.GenderId;
+                    student.GroupId = data.GroupId;
+                    db.SubmitChanges();
+                }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> TryDeleteAsync(int id)
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Student>().DeleteOnSubmit(db.GetTable<Student>().FirstOrDefault(s => s.Id == id)); db.SubmitChanges();}).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Student>> TryReadAllAsync()
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Student>().ToList()).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

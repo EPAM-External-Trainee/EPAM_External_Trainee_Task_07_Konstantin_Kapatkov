@@ -3,6 +3,7 @@ using DAL.ORM.Models;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -12,42 +13,77 @@ namespace DAL.DAO.Models
 
         public DaoSubject(string connectionString) => _connectionString = connectionString;
 
-        public void Create(Subject data)
+        public async Task<bool> TryCreateAsync(Subject data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Subject>().InsertOnSubmit(data);
-            db.SubmitChanges();
-        }
-
-        public Subject Read(int id)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Subject>().FirstOrDefault(s => s.Id == id);
-        }     
-
-        public void Update(Subject data)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            Subject subject = db.GetTable<Subject>().FirstOrDefault(s => s.Id == data.Id);
-
-            if (subject != null)
+            try
             {
-                subject.Name = data.Name;
-                db.SubmitChanges();
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Subject>().InsertOnSubmit(data); db.SubmitChanges();}).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void Delete(int id)
+        public async Task<Subject> TryReadAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Subject>().DeleteOnSubmit(db.GetTable<Subject>().FirstOrDefault(s => s.Id == id));
-            db.SubmitChanges();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Subject>().FirstOrDefault(s => s.Id == id)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
+        }     
+
+        public async Task<bool> TryUpdateAsync(Subject data)
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() =>
+                {
+                    Subject subject = db.GetTable<Subject>().FirstOrDefault(s => s.Id == data.Id);
+                    subject.Name = data.Name;
+                    db.SubmitChanges();
+                }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public IEnumerable<Subject> ReadAll()
+        public async Task<bool> TryDeleteAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Subject>().ToList();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Subject>().DeleteOnSubmit(db.GetTable<Subject>().FirstOrDefault(s => s.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Subject>> TryReadAllAsync()
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Subject>().ToList()).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

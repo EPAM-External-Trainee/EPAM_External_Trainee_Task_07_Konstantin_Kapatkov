@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -13,42 +14,77 @@ namespace DAL.DAO.Models
 
         public DaoGender(string connectionString) => _connectionString = connectionString;
 
-        public void Create(Gender data)
+        public async Task<bool> TryCreateAsync(Gender data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().InsertOnSubmit(data);
-            db.SubmitChanges();
-        }
-
-        public Gender Read(int id)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().FirstOrDefault(g => g.Id == id);
-        }
-
-        public void Update(Gender data)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            Gender gender = db.GetTable<Gender>().FirstOrDefault(g => g.Id == data.Id);
-
-            if (gender != null)
+            try
             {
-                gender.GenderType = data.GenderType;
-                db.SubmitChanges();
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Gender>().InsertOnSubmit(data); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void Delete(int id)
+        public async Task<Gender> TryReadAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<Gender>().DeleteOnSubmit(db.GetTable<Gender>().FirstOrDefault(g => g.Id == id));
-            db.SubmitChanges();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Gender>().FirstOrDefault(g => g.Id == id)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public IEnumerable<Gender> ReadAll()
+        public async Task<bool> TryUpdateAsync(Gender data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<Gender>().ToList();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() =>
+                {
+                    Gender gender = db.GetTable<Gender>().FirstOrDefault(g => g.Id == data.Id);
+                    gender.GenderType = data.GenderType;
+                    db.SubmitChanges();
+                }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> TryDeleteAsync(int id)
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<Gender>().DeleteOnSubmit(db.GetTable<Gender>().FirstOrDefault(g => g.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Gender>> TryReadAllAsync()
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<Gender>().ToList()).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

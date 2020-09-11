@@ -3,6 +3,7 @@ using DAL.ORM.Models;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -12,42 +13,77 @@ namespace DAL.DAO.Models
 
         public DaoGroupSpecialty(string connectionString) => _connectionString = connectionString;
 
-        public void Create(GroupSpecialty data)
+        public async Task<bool> TryCreateAsync(GroupSpecialty data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<GroupSpecialty>().InsertOnSubmit(data);
-            db.SubmitChanges();
-        }
-
-        public GroupSpecialty Read(int id)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == id);
-        }
-
-        public void Update(GroupSpecialty data)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            GroupSpecialty groupSpecialty = db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == data.Id);
-
-            if (groupSpecialty != null)
+            try
             {
-                groupSpecialty.Name = data.Name;
-                db.SubmitChanges();
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<GroupSpecialty>().InsertOnSubmit(data); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void Delete(int id)
+        public async Task<GroupSpecialty> TryReadAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<GroupSpecialty>().DeleteOnSubmit(db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == id));
-            db.SubmitChanges();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == id)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public IEnumerable<GroupSpecialty> ReadAll()
+        public async Task<bool> TryUpdateAsync(GroupSpecialty data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<GroupSpecialty>().ToList();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() =>
+                {
+                    GroupSpecialty groupSpecialty = db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == data.Id);
+                    groupSpecialty.Name = data.Name;
+                    db.SubmitChanges();
+                }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> TryDeleteAsync(int id)
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<GroupSpecialty>().DeleteOnSubmit(db.GetTable<GroupSpecialty>().FirstOrDefault(gs => gs.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<GroupSpecialty>> TryReadAllAsync()
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<GroupSpecialty>().ToList()).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

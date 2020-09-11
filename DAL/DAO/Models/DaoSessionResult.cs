@@ -3,6 +3,7 @@ using DAL.ORM.Models.SessionInfo;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
@@ -12,44 +13,79 @@ namespace DAL.DAO.Models
 
         public DaoSessionResult(string connectionString) => _connectionString = connectionString;
 
-        public void Create(SessionResult data)
+        public async Task<bool> TryCreateAsync(SessionResult data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<SessionResult>().InsertOnSubmit(data);
-            db.SubmitChanges();
-        }
-
-        public SessionResult Read(int id)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == id);
-        }
-
-        public void Update(SessionResult data)
-        {
-            using DataContext db = new DataContext(_connectionString);
-            SessionResult sessionResult = db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == data.Id);
-
-            if (sessionResult != null)
+            try
             {
-                sessionResult.Assessment = data.Assessment;
-                sessionResult.StudentId = data.StudentId;
-                sessionResult.SubjectId = data.SubjectId;
-                db.SubmitChanges();
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<SessionResult>().InsertOnSubmit(data); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void Delete(int id)
+        public async Task<SessionResult> TryReadAsync(int id)
         {
-            using DataContext db = new DataContext(_connectionString);
-            db.GetTable<SessionResult>().DeleteOnSubmit(db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == id));
-            db.SubmitChanges();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == id)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public IEnumerable<SessionResult> ReadAll()
+        public async Task<bool> TryUpdateAsync(SessionResult data)
         {
-            using DataContext db = new DataContext(_connectionString);
-            return db.GetTable<SessionResult>().ToList();
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() =>
+                {
+                    SessionResult sessionResult = db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == data.Id);
+                    sessionResult.Assessment = data.Assessment;
+                    sessionResult.StudentId = data.StudentId;
+                    sessionResult.SubjectId = data.SubjectId;
+                    db.SubmitChanges();
+                }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> TryDeleteAsync(int id)
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                await Task.Run(() => { db.GetTable<SessionResult>().DeleteOnSubmit(db.GetTable<SessionResult>().FirstOrDefault(sr => sr.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<SessionResult>> TryReadAllAsync()
+        {
+            try
+            {
+                using DataContext db = new DataContext(_connectionString);
+                return await Task.Run(() => db.GetTable<SessionResult>().ToList()).ConfigureAwait(false);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.Enums;
-using BLL.Reports.Interfaces.GroupSessionResultReport;
+using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
-using BLL.Reports.Structs.ReportData;
 using DAL.ORM.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +9,9 @@ using System.Linq;
 
 namespace BLL.Reports.Models
 {
-    public class AssessmentDynamicsReport : Report, IAssessmentDynamicsReport
+    public class AssessmentDynamicsTable : Report /*IAssessmentDynamicsReport*/
     {
-        public AssessmentDynamicsReport(string connectionString) : base(connectionString)
+        public AssessmentDynamicsTable(string connectionString) : base(connectionString)
         {
         }
 
@@ -85,25 +84,16 @@ namespace BLL.Reports.Models
                    select double.Parse(sr.Assessment);
         }
 
-        public AssessmentDynamicsReportData GetReportData() => new AssessmentDynamicsReportData(GetTableRowsData(), Sessions.Select(s => s.AcademicYear));
+        public AssessmentDynamicsTableView GetAssessmentDynamicsTable() => new AssessmentDynamicsTableView(GetTableRowsData(), Sessions.Select(s => s.AcademicYear));
 
-        public AssessmentDynamicsReportData GetReportData(AssessmentDynamicsReportOrderBy orderBy, bool isDesc = false)
+        public AssessmentDynamicsTableView GetAssessmentDynamicsTable(AssessmentDynamicsTableOrderBy orderBy, bool isDesc = false)
         {
-            List<AssessmentDynamicsTableRowView> tableRowViewsData = GetTableRowsData().ToList();
-            switch (orderBy)
+            return orderBy switch
             {
-                case AssessmentDynamicsReportOrderBy.Subject:
-                    return isDesc
-                        ? new AssessmentDynamicsReportData(tableRowViewsData.OrderByDescending(d => d.SubjectName), GetYears())
-                        : new AssessmentDynamicsReportData(tableRowViewsData.OrderBy(d => d.SubjectName), GetYears());
-
-                case AssessmentDynamicsReportOrderBy.AverageAssessment:
-                    return isDesc
-                        ? new AssessmentDynamicsReportData(tableRowViewsData.OrderByDescending(d => d.AvgAssessments.Last()), GetYears())
-                        : new AssessmentDynamicsReportData(tableRowViewsData.OrderBy(d => d.AvgAssessments.Last()), GetYears());
-
-                default: throw new NotImplementedException();
-            }
+                AssessmentDynamicsTableOrderBy.Subject => isDesc ? new ExcelViews.ExcelTableView.GroupSessionResultReport.AssessmentDynamicsTableView(GetTableRowsData().OrderByDescending(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)) : new ExcelViews.ExcelTableView.GroupSessionResultReport.AssessmentDynamicsTableView(GetTableRowsData().OrderBy(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)),
+                AssessmentDynamicsTableOrderBy.AverageAssessment => isDesc ? new ExcelViews.ExcelTableView.GroupSessionResultReport.AssessmentDynamicsTableView(GetTableRowsData().OrderByDescending(d => d.AvgAssessments.Last()), Sessions.Select(s => s.AcademicYear)) : new ExcelViews.ExcelTableView.GroupSessionResultReport.AssessmentDynamicsTableView(GetTableRowsData().OrderBy(d => d.AvgAssessments.Last()), Sessions.Select(s => s.AcademicYear)),
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }
