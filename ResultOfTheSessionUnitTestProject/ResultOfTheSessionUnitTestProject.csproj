@@ -52,8 +52,8 @@
     <Compile Include="ORMUnitTest\GenderUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportsUnitTest\ReportsUnitTestData.cs" />
-    <Compile Include="ReportsUnitTest\SessionResultReportUnitTests.cs" />
-    <Compile Include="ReportsUnitTest\GroupSessionResultReporsUnitTests.cs" />
+    <Compile Include="ReportsUnitTest\SessionResultReportUnitTests\SessionResultReportUnitTests.cs" />
+    <Compile Include="ReportsUnitTest\GroupSessionResultReporsUnitTests\GroupSessionResultReporsUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
