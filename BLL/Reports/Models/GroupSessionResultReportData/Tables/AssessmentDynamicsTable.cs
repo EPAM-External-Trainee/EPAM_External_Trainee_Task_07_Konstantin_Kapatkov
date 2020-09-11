@@ -1,6 +1,7 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.Enums;
 using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
+using BLL.Reports.Interfaces.GroupSessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
 using DAL.ORM.Models;
 using System;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace BLL.Reports.Models
 {
-    public class AssessmentDynamicsTable : Report /*IAssessmentDynamicsReport*/
+    public class AssessmentDynamicsTable : Report, IAssessmentDynamicsTable
     {
         public AssessmentDynamicsTable(string connectionString) : base(connectionString)
         {

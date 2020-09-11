@@ -42,7 +42,7 @@ namespace BLL.Reports.Models.ReportData
             {
                 GroupSessionResultTables = GroupSessionResultTable.GetGroupSessionResultTables(),
                 AssessmentDynamicsTable = AssessmentDynamicsTable.GetAssessmentDynamicsTable(orderBy, isDescOrder)
-        };
+            };
         }
     }
 }

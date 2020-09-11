@@ -8,12 +8,9 @@ namespace BLL.Reports.Abstract
 {
     public abstract class Report : IReport
     {
-        protected readonly string _connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;";
-
-        protected Report(string connectionString)
+        protected Report(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;")
         {
-            _connectionString = connectionString;
-            DaoFactory = DaoFactory.GetInstance(_connectionString);
+            DaoFactory = DaoFactory.GetInstance(connectionString);
             Sessions = DaoFactory.GetDaoSession().TryReadAllAsync().Result;
             SessionResults = DaoFactory.GetDaoSessionResult().TryReadAllAsync().Result;
             SessionSchedules = DaoFactory.GetDaoSessionSchedule().TryReadAllAsync().Result;
