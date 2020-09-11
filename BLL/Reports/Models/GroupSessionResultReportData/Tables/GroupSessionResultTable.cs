@@ -1,4 +1,5 @@
 ﻿using BLL.Reports.Abstract;
+using BLL.Reports.Interfaces.GroupSessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport;
 using BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace BLL.Reports.Models
 {
-    public class GroupSessionResultTable : Report
+    public class GroupSessionResultTable : Report, IGroupSessionResultTable
     {
         public GroupSessionResultTable(string connectionString) : base(connectionString)
         {

@@ -14,9 +14,9 @@ namespace BLL.Reports.Models.ReportData
             AssessmentDynamicsTable = new AssessmentDynamicsTable(connectionString);
         }
 
-        public GroupSessionResultTable GroupSessionResultTable { get; set; }
+        public IGroupSessionResultTable GroupSessionResultTable { get; set; }
 
-        public AssessmentDynamicsTable AssessmentDynamicsTable { get; set; }
+        public IAssessmentDynamicsTable AssessmentDynamicsTable { get; set; }
 
         public GroupSessionResultReportView GetReport()
         {

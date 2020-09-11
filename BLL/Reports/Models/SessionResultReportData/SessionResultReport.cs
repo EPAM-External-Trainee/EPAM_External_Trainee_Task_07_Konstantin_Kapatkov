@@ -16,9 +16,9 @@ namespace BLL.Reports.Models
             SpecialtyAssessmetsTable = new SpecialtyAssessmetsTable(connectionString);
         }
 
-        public ExaminersTable ExaminersTable { get; set; }
+        public IExaminersTable ExaminersTable { get; set; }
 
-        public GroupTable GroupTable { get; set; }
+        public IGroupTable GroupTable { get; set; }
 
         public SpecialtyAssessmetsTable SpecialtyAssessmetsTable { get; set; }
 
@@ -56,7 +56,7 @@ namespace BLL.Reports.Models
         {
             return new SessionResultReportView
             {
-                GroupTables = GroupTable.GetGroupTableData(sessionId),
+                GroupTables = GroupTable.GetGroupTableData(sessionId, predicate, isDescOrder),
                 SpecialtyAssessmetsTable = SpecialtyAssessmetsTable.GetSpecialtyAssessmetsTableData(sessionId),
                 ExaminersTable = ExaminersTable.GetExaminersTableData(sessionId)
             };

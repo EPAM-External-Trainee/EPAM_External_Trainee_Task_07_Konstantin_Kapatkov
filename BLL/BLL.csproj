@@ -57,6 +57,9 @@
     <Compile Include="Reports\Excel\Views\SessionResultReport\TableView\SpecialtyAssessmetsTableView.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsTable.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultReport.cs" />
+    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultTable.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\IExaminersTable.cs" />
+    <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTable.cs" />
     <Compile Include="Reports\Models\Abstract\Report.cs" />
     <Compile Include="Reports\Enums\AssessmentDynamicsReportOrderBy.cs" />
     <Compile Include="Reports\Excel\Views\GroupSessionResultReport\TableView\AssessmentDynamicsTableView.cs" />

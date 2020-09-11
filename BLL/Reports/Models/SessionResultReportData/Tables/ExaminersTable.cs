@@ -1,5 +1,6 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.ExcelViews.SessionResultReport.TableView;
+using BLL.Reports.Interfaces.SessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
 using DAL.ORM.Models;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace BLL.Reports.Models.SessionResultReportData.Tables
 {
-    public class ExaminersTable : Report
+    public class ExaminersTable : Report, IExaminersTable
     {
         public ExaminersTable(string connectionString) : base(connectionString)
         {
