@@ -1,5 +1,6 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.ExcelViews.SessionResultReport.TableView;
+using BLL.Reports.Interfaces.SessionResultReport;
 using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
 using DAL.ORM.Models;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace BLL.Reports.Models.SessionResultReportData
 {
-    public class SpecialtyAssessmetsTable : Report
+    public class SpecialtyAssessmetsTable : Report, ISpecialtyAssessmetsTable
     {
         public SpecialtyAssessmetsTable(string connectionString) : base(connectionString)
         {
@@ -55,6 +56,5 @@ namespace BLL.Reports.Models.SessionResultReportData
         public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId) => new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId));
 
         public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId, Func<SpecialtyAssessmetsTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate)) : new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderByDescending(predicate));
-
     }
 }

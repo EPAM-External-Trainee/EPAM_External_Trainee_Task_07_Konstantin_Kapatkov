@@ -20,7 +20,7 @@ namespace BLL.Reports.Models
 
         public IGroupTable GroupTable { get; set; }
 
-        public SpecialtyAssessmetsTable SpecialtyAssessmetsTable { get; set; }
+        public ISpecialtyAssessmetsTable SpecialtyAssessmetsTable { get; set; }
 
         public SessionResultReportView GetReport(int sessionId)
         {
