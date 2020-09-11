@@ -1,7 +1,7 @@
 ﻿using BLL.Reports.Abstract;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews;
 using BLL.Reports.Interfaces.GroupSessionResultReport;
-using BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport;
-using BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport;
 using System;
 using System.Collections.Generic;
 using System.Linq;

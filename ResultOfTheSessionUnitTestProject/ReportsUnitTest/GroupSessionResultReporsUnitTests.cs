@@ -1,6 +1,6 @@
 ﻿using BLL.Reports.Enums;
 using BLL.Reports.Excel;
-using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
+using BLL.Reports.Views.GroupSessionResultReport.ReportDataViews;
 using BLL.Reports.Models;
 using BLL.Reports.Models.ReportData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

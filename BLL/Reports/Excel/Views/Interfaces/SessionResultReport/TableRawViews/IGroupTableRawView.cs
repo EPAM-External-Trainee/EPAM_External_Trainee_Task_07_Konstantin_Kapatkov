@@ -1,4 +1,4 @@
-﻿namespace BLL.Reports.Interfaces.SessionResultReport
+﻿namespace BLL.Reports.Excel.Views.Interfaces.SessionResultReport.TableRawViews
 {
     public interface IGroupTableRawView
     {

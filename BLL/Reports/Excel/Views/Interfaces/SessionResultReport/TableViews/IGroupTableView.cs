@@ -1,4 +1,4 @@
-﻿using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
+﻿using BLL.Reports.Excel.Views.SessionResultReport;
 using System.Collections.Generic;
 
 namespace BLL.Reports.Excel.Views.Interfaces.SessionResultReport.TableViews

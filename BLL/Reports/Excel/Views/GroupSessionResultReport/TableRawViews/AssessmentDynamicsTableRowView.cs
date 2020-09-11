@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark
+namespace BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews
 {
     public struct AssessmentDynamicsTableRowView : IAssessmentDynamicsTableRowView
     {

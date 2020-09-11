@@ -1,5 +1,5 @@
-﻿using BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport;
-using BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport;
+﻿using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews;
 using System;
 using System.Collections.Generic;
 

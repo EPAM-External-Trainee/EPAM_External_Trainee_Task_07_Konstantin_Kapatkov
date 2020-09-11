@@ -1,6 +1,6 @@
-﻿using BLL.Reports.Interfaces.SessionResultReport;
+﻿using BLL.Reports.Excel.Views.Interfaces.SessionResultReport.TableRawViews;
 
-namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
+namespace BLL.Reports.Excel.Views.SessionResultReport
 {
     public struct SpecialtyAssessmetsTableRawView : ISpecialtyAssessmetsTableRawView
     {
@@ -19,8 +19,8 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
         public override int GetHashCode()
         {
             int hashCode = 1942220009;
-            hashCode = hashCode * -1521134295 + SpecialityName.GetHashCode();
-            hashCode = hashCode * -1521134295 + AverageAssessment.GetHashCode();
+            hashCode = (hashCode * -1521134295) + SpecialityName.GetHashCode();
+            hashCode = (hashCode * -1521134295) + AverageAssessment.GetHashCode();
             return hashCode;
         }
     }

@@ -1,4 +1,4 @@
-﻿using BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport;
+﻿using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
 using System.Collections.Generic;
 
 namespace BLL.Reports.Excel.Views.Interfaces.GroupSessionResultReport.TableViews

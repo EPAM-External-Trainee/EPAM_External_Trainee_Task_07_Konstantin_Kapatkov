@@ -1,6 +1,6 @@
 ﻿using BLL.Reports.Interfaces.GroupSessionResultReport;
 
-namespace BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport
+namespace BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews
 {
     public struct GroupSessionResultTableRawView : IGroupSessionResultTableRawView
     {

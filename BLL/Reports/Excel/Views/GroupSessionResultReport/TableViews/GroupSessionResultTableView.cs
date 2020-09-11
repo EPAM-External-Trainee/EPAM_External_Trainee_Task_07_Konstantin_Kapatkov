@@ -1,8 +1,8 @@
-﻿using BLL.Reports.Excel.Views.Interfaces.GroupSessionResultReport.TableViews;
-using BLL.Reports.Structs.ExcelTableRawViews.GroupSessionResultReport;
+﻿using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
+using BLL.Reports.Excel.Views.Interfaces.GroupSessionResultReport.TableViews;
 using System.Collections.Generic;
 
-namespace BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport
+namespace BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews
 {
     public class GroupSessionResultTableView : IGroupSessionResultTableView
     {

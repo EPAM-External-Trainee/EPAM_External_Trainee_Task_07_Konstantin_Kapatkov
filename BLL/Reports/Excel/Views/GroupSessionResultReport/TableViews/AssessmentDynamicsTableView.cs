@@ -1,8 +1,8 @@
 ﻿using BLL.Reports.Excel.Views.Interfaces.GroupSessionResultReport.TableViews;
-using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
 using System.Collections.Generic;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
 
-namespace BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport
+namespace BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews
 {
     public class AssessmentDynamicsTableView : IAssessmentDynamicsTableView
     {

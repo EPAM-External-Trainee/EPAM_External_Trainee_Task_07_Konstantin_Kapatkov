@@ -1,8 +1,8 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.Enums;
-using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableRawViews;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews;
 using BLL.Reports.Interfaces.GroupSessionResultReport;
-using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
 using DAL.ORM.Models;
 using System;
 using System.Collections.Generic;

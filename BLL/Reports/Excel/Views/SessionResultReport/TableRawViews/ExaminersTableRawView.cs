@@ -1,6 +1,6 @@
-﻿using BLL.Reports.Interfaces.SessionResultReport;
+﻿using BLL.Reports.Excel.Views.Interfaces.SessionResultReport.TableRawViews;
 
-namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
+namespace BLL.Reports.Excel.Views.SessionResultReport
 {
     public struct ExaminersTableRawView : IExaminersTableRawView
     {

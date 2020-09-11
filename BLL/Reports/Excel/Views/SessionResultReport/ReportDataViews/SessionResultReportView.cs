@@ -1,8 +1,8 @@
 ﻿using BLL.Reports.Excel.Views.Interfaces.SessionResultReport.ReportDataViews;
-using BLL.Reports.ExcelViews.SessionResultReport.TableView;
+using BLL.Reports.Views.SessionResultReport.TableView;
 using System.Collections.Generic;
 
-namespace BLL.Reports.ExcelViews.ReportViews
+namespace BLL.Reports.Views.ReportViews
 {
     public class SessionResultReportView : ISessionResultReportView
     {

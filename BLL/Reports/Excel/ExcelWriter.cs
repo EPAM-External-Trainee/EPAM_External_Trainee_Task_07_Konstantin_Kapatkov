@@ -1,7 +1,7 @@
-﻿using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
-using BLL.Reports.ExcelViews.ReportViews;
-using BLL.Reports.ExcelViews.SessionResultReport.TableView;
-using BLL.Reports.Structs.ExcelTableView.GroupSessionResultReport;
+﻿using BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews;
+using BLL.Reports.Views.GroupSessionResultReport.ReportDataViews;
+using BLL.Reports.Views.ReportViews;
+using BLL.Reports.Views.SessionResultReport.TableView;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Collections.Generic;

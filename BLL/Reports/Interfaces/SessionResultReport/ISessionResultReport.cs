@@ -1,5 +1,5 @@
-﻿using BLL.Reports.ExcelViews.ReportViews;
-using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
+﻿using BLL.Reports.Views.ReportViews;
+using BLL.Reports.Excel.Views.SessionResultReport;
 using System;
 
 namespace BLL.Reports.Interfaces.SessionResultReport

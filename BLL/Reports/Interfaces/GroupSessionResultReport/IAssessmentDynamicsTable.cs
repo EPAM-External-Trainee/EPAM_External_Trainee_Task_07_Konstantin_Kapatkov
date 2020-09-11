@@ -1,5 +1,5 @@
 ﻿using BLL.Reports.Enums;
-using BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport;
+using BLL.Reports.Excel.Views.GroupSessionResultReport.TableViews;
 
 namespace BLL.Reports.Interfaces.GroupSessionResultReport
 {
