@@ -1,16 +1,17 @@
-﻿using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
+﻿using BLL.Reports.ExcelViews.ReportViews;
+using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
 using System;
 
 namespace BLL.Reports.Interfaces.SessionResultReport
 {
-    //public interface ISessionResultReport
-    //{
-    //    SessionResultReportData GetReportData(int sessionId);
+    public interface ISessionResultReport
+    {
+        SessionResultReportView GetReport(int sessionId);
 
-    //    SessionResultReportData GetReportData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder);
+        SessionResultReportView GetReport(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder);
 
-    //    SessionResultReportData GetReportData(int sessionId, Func<GroupSpecialtyTableRawView, object> predicate, bool isDescOrder);
+        SessionResultReportView GetReport(int sessionId, Func<SpecialtyAssessmetsTableRawView, object> predicate, bool isDescOrder);
 
-    //    SessionResultReportData GetReportData(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder);
-    //}
+        SessionResultReportView GetReport(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder);
+    }
 }

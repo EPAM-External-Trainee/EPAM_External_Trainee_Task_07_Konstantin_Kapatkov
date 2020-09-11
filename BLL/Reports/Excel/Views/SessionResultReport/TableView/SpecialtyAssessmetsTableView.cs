@@ -9,10 +9,10 @@ namespace BLL.Reports.ExcelViews.SessionResultReport.TableView
         {
         }
 
-        public SpecialtyAssessmetsTableView(IEnumerable<GroupSpecialtyTableRawView> tableRawViews) => TableRawViews = tableRawViews;
+        public SpecialtyAssessmetsTableView(IEnumerable<SpecialtyAssessmetsTableRawView> tableRawViews) => TableRawViews = tableRawViews;
 
         public string[] Headers { get; } = new string[] { "Specialty", "Average assessment" };
 
-        public IEnumerable<GroupSpecialtyTableRawView> TableRawViews { get; set; }
+        public IEnumerable<SpecialtyAssessmetsTableRawView> TableRawViews { get; set; }
     }
 }

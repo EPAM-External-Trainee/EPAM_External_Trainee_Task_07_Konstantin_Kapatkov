@@ -2,9 +2,9 @@
 
 namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
 {
-    public struct GroupSpecialtyTableRawView : IGroupSpecialtyTableRawView
+    public struct SpecialtyAssessmetsTableRawView : ISpecialtyAssessmetsTableRawView
     {
-        public GroupSpecialtyTableRawView(string specialityName, double averageAssessment)
+        public SpecialtyAssessmetsTableRawView(string specialityName, double averageAssessment)
         {
             SpecialityName = specialityName;
             AverageAssessment = averageAssessment;
@@ -14,7 +14,7 @@ namespace BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport
 
         public double AverageAssessment { get; set; }
 
-        public override bool Equals(object obj) => obj is GroupSpecialtyTableRawView view && SpecialityName == view.SpecialityName && AverageAssessment == view.AverageAssessment;
+        public override bool Equals(object obj) => obj is SpecialtyAssessmetsTableRawView view && SpecialityName == view.SpecialityName && AverageAssessment == view.AverageAssessment;
 
         public override int GetHashCode()
         {

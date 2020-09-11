@@ -36,16 +36,16 @@ namespace BLL.Reports.Models.SessionResultReportData
                    select gs;
         }
 
-        private IEnumerable<GroupSpecialtyTableRawView> GetGroupSpecialtyTableRawsData(int sessionId)
+        private IEnumerable<SpecialtyAssessmetsTableRawView> GetGroupSpecialtyTableRawsData(int sessionId)
         {
             IEnumerable<GroupSpecialty> groupSpecialities = GetGroupSpecialities(sessionId).Distinct();
-            List<GroupSpecialtyTableRawView> result = new List<GroupSpecialtyTableRawView>();
+            List<SpecialtyAssessmetsTableRawView> result = new List<SpecialtyAssessmetsTableRawView>();
             List<double> assessments = new List<double>();
 
             foreach (var specialty in groupSpecialities)
             {
                 assessments.AddRange(GetAssessments(sessionId, specialty.Id));
-                result.Add(new GroupSpecialtyTableRawView(specialty.Name, Math.Round(assessments.Average(), 2)));
+                result.Add(new SpecialtyAssessmetsTableRawView(specialty.Name, Math.Round(assessments.Average(), 2)));
                 assessments.Clear();
             }
 
@@ -53,5 +53,8 @@ namespace BLL.Reports.Models.SessionResultReportData
         }
 
         public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId) => new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId));
+
+        public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId, Func<SpecialtyAssessmetsTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate)) : new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderByDescending(predicate));
+
     }
 }

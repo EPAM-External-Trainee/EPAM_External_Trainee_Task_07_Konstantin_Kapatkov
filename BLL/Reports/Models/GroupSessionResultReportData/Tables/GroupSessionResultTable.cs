@@ -45,7 +45,7 @@ namespace BLL.Reports.Models
 
         public IEnumerable<GroupSessionResultTableView> GetGroupSessionResultTables() => Sessions.Select(session => new GroupSessionResultTableView(GetRowData(session.Id), GetSessionName(session.Id), GetSessionAcademicYear(session.Id)));
 
-        public IEnumerable<GroupSessionResultTableView> GetReportData(Func<GroupSessionResultTableRawView, object> predicate, bool isDescOrder = false)
+        public IEnumerable<GroupSessionResultTableView> GetGroupSessionResultTables(Func<GroupSessionResultTableRawView, object> predicate, bool isDescOrder = false)
         {
             List<GroupSessionResultTableView> result = new List<GroupSessionResultTableView>();
             foreach (var session in Sessions)

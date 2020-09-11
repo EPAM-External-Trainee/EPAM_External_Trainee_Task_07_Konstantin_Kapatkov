@@ -50,5 +50,7 @@ namespace BLL.Reports.Models.SessionResultReportData.Tables
         }
 
         public ExaminersTableView GetExaminersTableData(int sessionId) => new ExaminersTableView(GetExaminersTableRawsData(sessionId));
+
+        public ExaminersTableView GetExaminersTableData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderBy(predicate)) : new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderByDescending(predicate));
     }
 }

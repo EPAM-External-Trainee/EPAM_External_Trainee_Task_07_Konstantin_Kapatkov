@@ -1,6 +1,6 @@
 ﻿namespace BLL.Reports.Interfaces.SessionResultReport
 {
-    public interface IGroupSpecialtyTableRawView
+    public interface ISpecialtyAssessmetsTableRawView
     {
         string SpecialityName { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using BLL.Reports.Abstract;
 using BLL.Reports.ExcelViews.SessionResultReport.TableView;
 using BLL.Reports.Structs.ExcelTableRawViews.SessionResultReport;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,12 +29,21 @@ namespace BLL.Reports.Models.SessionResultReportData
 
         private string GetSessionName(int sessionId) => Sessions.FirstOrDefault(s => s.Id == sessionId)?.Name;
 
-        public IEnumerable<GroupTableView> GetGroupTableData(int sessionId)
+        public IEnumerable<GroupTableView> GetGroupTableData(int sessionId) => SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList().Select(groupId => new GroupTableView(GetGroupTableRowsData(sessionId, groupId), GetGroupName(groupId), GetSessionName(sessionId))).ToList();
+
+        public IEnumerable<GroupTableView> GetGroupTableData(int sessionId, Func<GroupTableRawView, object> predicate, bool isDescOrder)
         {
             List<GroupTableView> result = new List<GroupTableView>();
             foreach (int groupId in SessionSchedules.Where(ss => ss.SessionId == sessionId).Select(ss => ss.GroupId).Distinct().ToList())
             {
-                result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId), GetGroupName(groupId), GetSessionName(sessionId)));
+                if (isDescOrder)
+                {
+                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderByDescending(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
+                }
+                else
+                {
+                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderBy(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
+                }
             }
             return result;
         }
