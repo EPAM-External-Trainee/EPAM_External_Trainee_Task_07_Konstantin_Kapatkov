@@ -1,9 +1,10 @@
-﻿using BLL.Reports.ExcelViews.SessionResultReport.TableView;
+﻿using BLL.Reports.Excel.Views.Interfaces.SessionResultReport.ReportDataViews;
+using BLL.Reports.ExcelViews.SessionResultReport.TableView;
 using System.Collections.Generic;
 
 namespace BLL.Reports.ExcelViews.ReportViews
 {
-    public class SessionResultReportView
+    public class SessionResultReportView : ISessionResultReportView
     {
         public IEnumerable<GroupTableView> GroupTables { get; set; }
 

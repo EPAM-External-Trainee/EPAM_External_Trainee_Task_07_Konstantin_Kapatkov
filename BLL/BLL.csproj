@@ -52,9 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Excel\Views\SessionResultReport\TableView\ExaminersTableView.cs" />
-    <Compile Include="Reports\Excel\Views\SessionResultReport\TableView\GroupTableView.cs" />
-    <Compile Include="Reports\Excel\Views\SessionResultReport\TableView\SpecialtyAssessmetsTableView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\GroupSessionResultReport\ReportDataViews\IGroupSessionResultReportView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\GroupSessionResultReport\TableViews\IAssessmentDynamicsTableView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\GroupSessionResultReport\TableViews\IGroupSessionResultTableView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\ReportDataViews\ISessionResultReportView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableViews\IExaminersTableView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableViews\IGroupTableView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableViews\ISpecialtyAssessmetsTableView.cs" />
+    <Compile Include="Reports\Excel\Views\SessionResultReport\TableViews\ExaminersTableView.cs" />
+    <Compile Include="Reports\Excel\Views\SessionResultReport\TableViews\GroupTableView.cs" />
+    <Compile Include="Reports\Excel\Views\SessionResultReport\TableViews\SpecialtyAssessmetsTableView.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsTable.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultReport.cs" />
     <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultTable.cs" />
@@ -63,16 +70,16 @@
     <Compile Include="Reports\Interfaces\SessionResultReport\ISpecialtyAssessmetsTable.cs" />
     <Compile Include="Reports\Models\Abstract\Report.cs" />
     <Compile Include="Reports\Enums\AssessmentDynamicsReportOrderBy.cs" />
-    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\TableView\AssessmentDynamicsTableView.cs" />
-    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\ReportDataView\GroupSessionResultReportView.cs" />
-    <Compile Include="Reports\Excel\Views\SessionResultReport\ReportDataView\SessionResultReportView.cs" />
+    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\TableViews\AssessmentDynamicsTableView.cs" />
+    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\ReportDataViews\GroupSessionResultReportView.cs" />
+    <Compile Include="Reports\Excel\Views\SessionResultReport\ReportDataViews\SessionResultReportView.cs" />
     <Compile Include="Reports\Excel\ExcelWriter.cs" />
-    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IAssessmentDynamicsTableRowView.cs" />
-    <Compile Include="Reports\Interfaces\GroupSessionResultReport\IGroupSessionResultTableRawView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\GroupSessionResultReport\TableRawViews\IAssessmentDynamicsTableRowView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\GroupSessionResultReport\TableRawViews\IGroupSessionResultTableRawView.cs" />
     <Compile Include="Reports\Interfaces\IReport.cs" />
-    <Compile Include="Reports\Interfaces\SessionResultReport\IExaminersTableRawView.cs" />
-    <Compile Include="Reports\Interfaces\SessionResultReport\IGroupSpecialtyTableRawView.cs" />
-    <Compile Include="Reports\Interfaces\SessionResultReport\IGroupTableRawView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableRawViews\IExaminersTableRawView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableRawViews\IGroupSpecialtyTableRawView.cs" />
+    <Compile Include="Reports\Excel\Views\Interfaces\SessionResultReport\TableRawViews\IGroupTableRawView.cs" />
     <Compile Include="Reports\Interfaces\SessionResultReport\ISessionResultReport.cs" />
     <Compile Include="Reports\Models\GroupSessionResultReportData\Tables\AssessmentDynamicsTable.cs" />
     <Compile Include="Reports\Models\GroupSessionResultReportData\Tables\GroupSessionResultTable.cs" />
@@ -83,7 +90,7 @@
     <Compile Include="Reports\Excel\Views\SessionResultReport\TableRawViews\ExaminersTableRawView.cs" />
     <Compile Include="Reports\Excel\Views\SessionResultReport\TableRawViews\GroupSpecialtyTableRawView.cs" />
     <Compile Include="Reports\Excel\Views\SessionResultReport\TableRawViews\GroupTableRawView.cs" />
-    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\TableView\GroupSessionResultTableView.cs" />
+    <Compile Include="Reports\Excel\Views\GroupSessionResultReport\TableViews\GroupSessionResultTableView.cs" />
     <Compile Include="Reports\Models\SessionResultReportData\Tables\ExaminersTable.cs" />
     <Compile Include="Reports\Models\SessionResultReportData\Tables\GroupTable.cs" />
     <Compile Include="Reports\Models\SessionResultReportData\Tables\SpecialtyAssessmetsTable.cs" />

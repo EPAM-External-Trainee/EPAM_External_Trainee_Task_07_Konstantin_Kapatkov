@@ -1,9 +1,10 @@
-﻿using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
+﻿using BLL.Reports.Excel.Views.Interfaces.GroupSessionResultReport.TableViews;
+using BLL.Reports.Structs.ExcelTableRawViews.DynamicChangesInAverageMark;
 using System.Collections.Generic;
 
 namespace BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport
 {
-    public class AssessmentDynamicsTableView
+    public class AssessmentDynamicsTableView : IAssessmentDynamicsTableView
     {
         public AssessmentDynamicsTableView()
         {
@@ -15,7 +16,7 @@ namespace BLL.Reports.ExcelViews.ExcelTableView.GroupSessionResultReport
             TableRowViews = tableRowViews;
         }
 
-        public readonly string[] Headers = new string[] { "Subject", "Assessment" };
+        public string[] Headers { get; } = { "Subject", "Assessment" };
 
         public IEnumerable<string> AcademicYears { get; set; }
 
