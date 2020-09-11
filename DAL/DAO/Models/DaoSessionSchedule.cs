@@ -69,7 +69,7 @@ namespace DAL.DAO.Models
             try
             {
                 using DataContext db = new DataContext(_connectionString);
-                await Task.Run(() => { db.GetTable<SessionSchedule>().DeleteOnSubmit(db.GetTable<SessionSchedule>().FirstOrDefault(ss => ss.Id == id)); db.SubmitChanges();}).ConfigureAwait(false);
+                await Task.Run(() => { db.GetTable<SessionSchedule>().DeleteOnSubmit(db.GetTable<SessionSchedule>().FirstOrDefault(ss => ss.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
                 return true;
             }
             catch

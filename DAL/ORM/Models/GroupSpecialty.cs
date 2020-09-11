@@ -6,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "GroupSpecialties")]
     public class GroupSpecialty : IGroupSpecialty
     {
-        public GroupSpecialty() { }
+        public GroupSpecialty()
+        {
+        }
 
         public GroupSpecialty(string name) => Name = name;
 
@@ -14,7 +16,6 @@ namespace DAL.ORM.Models
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         public int Id { get; set; }
-
 
         [Column(Name = "Name")]
         public string Name { get; set; }

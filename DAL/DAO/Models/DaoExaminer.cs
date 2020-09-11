@@ -73,7 +73,6 @@ namespace DAL.DAO.Models
             {
                 return false;
             }
-
         }
 
         public async Task<IEnumerable<Examiner>> TryReadAllAsync()

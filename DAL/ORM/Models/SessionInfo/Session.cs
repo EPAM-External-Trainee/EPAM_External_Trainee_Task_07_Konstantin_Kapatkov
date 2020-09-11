@@ -6,7 +6,9 @@ namespace DAL.ORM.Models.SessionInfo
     [Table(Name = "Sessions")]
     public class Session : ISession
     {
-        public Session() { }
+        public Session()
+        {
+        }
 
         public Session(string name, string academicYear) => (Name, AcademicYear) = (name, academicYear);
 

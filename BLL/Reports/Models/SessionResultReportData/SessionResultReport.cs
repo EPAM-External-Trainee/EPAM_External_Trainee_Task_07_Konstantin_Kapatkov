@@ -1,8 +1,8 @@
-﻿using BLL.Reports.Views.ReportViews;
+﻿using BLL.Reports.Excel.Views.SessionResultReport;
 using BLL.Reports.Interfaces.SessionResultReport;
 using BLL.Reports.Models.SessionResultReportData;
 using BLL.Reports.Models.SessionResultReportData.Tables;
-using BLL.Reports.Excel.Views.SessionResultReport;
+using BLL.Reports.Views.ReportViews;
 using System;
 
 namespace BLL.Reports.Models

@@ -42,7 +42,7 @@ namespace BLL.Reports.Models
                     subjectYearAssessments.Clear();
                 }
 
-                if(subjectAvgAssessments.Count == years.Count)
+                if (subjectAvgAssessments.Count == years.Count)
                 {
                     result.Add(new AssessmentDynamicsTableRowView(subject.Name, new List<double>(subjectAvgAssessments.OrderBy(a => a))));
                 }

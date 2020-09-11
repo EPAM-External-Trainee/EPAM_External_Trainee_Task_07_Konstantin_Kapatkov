@@ -7,7 +7,9 @@ namespace DAL.ORM.Models
     [Table(Name = "Students")]
     public class Student : IStudent
     {
-        public Student() { }
+        public Student()
+        {
+        }
 
         public Student(string name, string surname, string patronymic, int genderId, DateTime birthday, int groupId) => (Name, Surname, Patronymic, GenderId, Birthday, GroupId) = (name, surname, patronymic, genderId, birthday, groupId);
 

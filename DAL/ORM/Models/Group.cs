@@ -6,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "Groups")]
     public class Group : IGroup
     {
-        public Group() { }
+        public Group()
+        {
+        }
 
         public Group(string name, int groupSpecialtyId) => (Name, GroupSpecialtyId) = (name, groupSpecialtyId);
 

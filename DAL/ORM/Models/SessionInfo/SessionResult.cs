@@ -6,7 +6,9 @@ namespace DAL.ORM.Models.SessionInfo
     [Table(Name = "SessionResults")]
     public class SessionResult : ISessionResult
     {
-        public SessionResult() { }
+        public SessionResult()
+        {
+        }
 
         public SessionResult(int subjectId, int studentId, string assessment, int sessionId) => (SubjectId, StudentId, Assessment, SessionId) = (subjectId, studentId, assessment, sessionId);
 
@@ -25,6 +27,6 @@ namespace DAL.ORM.Models.SessionInfo
         public string Assessment { get; set; }
 
         [Column(Name = "SessionId")]
-        public int SessionId { get; set ; }
+        public int SessionId { get; set; }
     }
 }

@@ -7,7 +7,9 @@ namespace DAL.ORM.Models.SessionInfo
     [Table(Name = "SessionSchedules")]
     public class SessionSchedule : ISessionSchedule
     {
-        public SessionSchedule() { }
+        public SessionSchedule()
+        {
+        }
 
         public SessionSchedule(int sessionId, int groupId, int subjectId, DateTime date, int knowledgeAssessmentFormId, int examinerId) => (SessionId, GroupId, SubjectId, Date, KnowledgeAssessmentFormId, ExaminerId) = (sessionId, groupId, subjectId, date, knowledgeAssessmentFormId, examinerId);
 

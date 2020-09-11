@@ -6,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "KnowledgeAssessmentForms")]
     public class KnowledgeAssessmentForm : IKnowledgeAssessmentForm
     {
-        public KnowledgeAssessmentForm() { }
+        public KnowledgeAssessmentForm()
+        {
+        }
 
         public KnowledgeAssessmentForm(string form) => Form = form;
 

@@ -18,7 +18,7 @@ namespace DAL.DAO.Models
             try
             {
                 using DataContext db = new DataContext(_connectionString);
-                await Task.Run(() => { db.GetTable<Subject>().InsertOnSubmit(data); db.SubmitChanges();}).ConfigureAwait(false);
+                await Task.Run(() => { db.GetTable<Subject>().InsertOnSubmit(data); db.SubmitChanges(); }).ConfigureAwait(false);
                 return true;
             }
             catch
@@ -38,7 +38,7 @@ namespace DAL.DAO.Models
             {
                 return null;
             }
-        }     
+        }
 
         public async Task<bool> TryUpdateAsync(Subject data)
         {

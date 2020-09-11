@@ -6,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "Examiners")]
     public class Examiner : IExaminer
     {
-        public Examiner() { }
+        public Examiner()
+        {
+        }
 
         public Examiner(string name, string surname, string patronymic) => (Name, Surname, Patronymic) = (name, surname, patronymic);
 

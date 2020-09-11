@@ -18,7 +18,7 @@ namespace DAL.DAO.Models
             try
             {
                 using DataContext db = new DataContext(_connectionString);
-                await Task.Run(() => { db.GetTable<Student>().InsertOnSubmit(data); db.SubmitChanges();}).ConfigureAwait(false);
+                await Task.Run(() => { db.GetTable<Student>().InsertOnSubmit(data); db.SubmitChanges(); }).ConfigureAwait(false);
                 return true;
             }
             catch
@@ -69,7 +69,7 @@ namespace DAL.DAO.Models
             try
             {
                 using DataContext db = new DataContext(_connectionString);
-                await Task.Run(() => { db.GetTable<Student>().DeleteOnSubmit(db.GetTable<Student>().FirstOrDefault(s => s.Id == id)); db.SubmitChanges();}).ConfigureAwait(false);
+                await Task.Run(() => { db.GetTable<Student>().DeleteOnSubmit(db.GetTable<Student>().FirstOrDefault(s => s.Id == id)); db.SubmitChanges(); }).ConfigureAwait(false);
                 return true;
             }
             catch

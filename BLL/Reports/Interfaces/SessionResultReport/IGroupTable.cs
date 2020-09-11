@@ -1,5 +1,5 @@
-﻿using BLL.Reports.Views.SessionResultReport.TableView;
-using BLL.Reports.Excel.Views.SessionResultReport;
+﻿using BLL.Reports.Excel.Views.SessionResultReport;
+using BLL.Reports.Views.SessionResultReport.TableView;
 using System;
 using System.Collections.Generic;
 

@@ -6,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "Subjects")]
     public class Subject : ISubject
     {
-        public Subject() { }
+        public Subject()
+        {
+        }
 
         public Subject(string name) => Name = name;
 

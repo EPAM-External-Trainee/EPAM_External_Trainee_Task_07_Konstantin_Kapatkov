@@ -155,7 +155,7 @@ namespace BLL.Reports.Excel
             workSheet.Cells[currentRow, currentRow - 1, currentRow + 1, currentRow - 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             workSheet.Cells[currentRow, currentRow - 1, currentRow + 1, currentRow - 1].Style.Font.Bold = true;
 
-            workSheet.Cells[currentRow, currentRow, currentRow , currentRow + 1].Merge = true;
+            workSheet.Cells[currentRow, currentRow, currentRow, currentRow + 1].Merge = true;
             workSheet.Cells[currentRow, currentRow, currentRow, currentRow + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             workSheet.Cells[currentRow, currentRow, currentRow, currentRow + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             workSheet.Cells[currentRow, currentRow, currentRow, currentRow].Style.Font.Bold = true;

@@ -1,5 +1,4 @@
 ﻿using ResultsOfTheSession.DAL.ORM.Interfaces;
-using System;
 using System.Data.Linq.Mapping;
 
 namespace DAL.ORM.Models
@@ -7,7 +6,9 @@ namespace DAL.ORM.Models
     [Table(Name = "Genders")]
     public class Gender : IGender
     {
-        public Gender() { }
+        public Gender()
+        {
+        }
 
         public Gender(string gednerType) => GenderType = gednerType;
 
