@@ -10,29 +10,52 @@ namespace ResultOfTheSessionUnitTestProject
         private DaoFactory daoFactory = DaoFactory.GetInstance(@"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;");
 
         [TestMethod]
-        public void CreateGender_Test()
+        [DataRow("Unknown")]
+        public void CreateGender_IsTrue_Test(string newGenderName)
         {
-            Gender gender = new Gender("Unknown");
-            daoFactory.GetDaoGender().TryCreateAsync(gender);
+            Assert.IsTrue(daoFactory.GetDaoGender().TryCreateAsync(new Gender(newGenderName)).Result);
         }
 
         [TestMethod]
-        public void ReadGender_Test()
+        [DataRow(1)]
+        public void ReadGender_IsNotNull_Test(int genderId)
         {
-            Gender gender = daoFactory.GetDaoGender().TryReadAsync(1).Result;
+            Assert.IsNotNull(daoFactory.GetDaoGender().TryReadAsync(genderId).Result);
         }
 
         [TestMethod]
-        public void UpdateGender_Test()
+        [DataRow(20)]
+        public void ReadGender_IsNull_Test(int genderId)
         {
-            Gender gender = new Gender(3, "NewUnknown2");
-            daoFactory.GetDaoGender().TryUpdateAsync(gender);
+            Assert.IsNull(daoFactory.GetDaoGender().TryReadAsync(genderId).Result);
         }
 
         [TestMethod]
-        public void DeleteGender_Test()
+        [DataRow(3, "UnknownAfterUpdate")]
+        public void UpdateGender_IsTrue_Test(int genderId, string genderName)
         {
-            daoFactory.GetDaoGender().TryDeleteAsync(3);
+            Assert.IsTrue(daoFactory.GetDaoGender().TryUpdateAsync(new Gender(genderId, genderName)).Result);
+        }
+
+        [TestMethod]
+        [DataRow(23, "UnknownAfterUpdate")]
+        public void UpdateGender_IsFalse_Test(int genderId, string genderName)
+        {
+            Assert.IsFalse(daoFactory.GetDaoGender().TryUpdateAsync(new Gender(genderId, genderName)).Result);
+        }
+
+        [TestMethod]
+        [DataRow(3)]
+        public void DeleteGender_IsTrue_Test(int genderId)
+        {
+            Assert.IsTrue(daoFactory.GetDaoGender().TryDeleteAsync(genderId).Result);
+        }
+
+        [TestMethod]
+        [DataRow(10)]
+        public void DeleteGender_IsFalse_Test(int genderId)
+        {
+            Assert.IsFalse(daoFactory.GetDaoGender().TryDeleteAsync(genderId).Result);
         }
     }
 }
