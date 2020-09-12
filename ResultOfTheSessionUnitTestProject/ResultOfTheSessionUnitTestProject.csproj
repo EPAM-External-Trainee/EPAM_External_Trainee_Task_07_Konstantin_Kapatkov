@@ -55,6 +55,7 @@
     <Compile Include="ReportsUnitTest\ReportsUnitTestData.cs" />
     <Compile Include="ReportsUnitTest\SessionResultReportUnitTests\SessionResultReportUnitTests.cs" />
     <Compile Include="ReportsUnitTest\GroupSessionResultReporsUnitTests\GroupSessionResultReporsUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\ExaminerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

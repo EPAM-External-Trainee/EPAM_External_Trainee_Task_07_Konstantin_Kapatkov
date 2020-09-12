@@ -56,5 +56,11 @@ namespace ResultOfTheSessionUnitTestProject
         {
             Assert.IsFalse(DaoFactory.GetDaoGender().TryDeleteAsync(genderId).Result);
         }
+
+        [TestMethod]
+        public void ReadAllGenders_IsNotNull_Test()
+        {
+            Assert.IsNotNull(DaoFactory.GetDaoGender().TryReadAllAsync().Result);
+        }
     }
 }

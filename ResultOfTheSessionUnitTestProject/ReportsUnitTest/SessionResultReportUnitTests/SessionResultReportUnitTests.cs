@@ -12,7 +12,7 @@ namespace ResultOfTheSessionUnitTestProject
         public static SessionResultReport Report = new SessionResultReport(ConnectionString);
 
         [TestMethod]
-        [DataRow(1)]
+        [DataRow(2)]
         public void SessionResultReport_Test(int sessionId)
         {
             ExcelWriter.WriteToExcel(Report.GetReport(sessionId), PathToSessionResultReportExcelFile);
