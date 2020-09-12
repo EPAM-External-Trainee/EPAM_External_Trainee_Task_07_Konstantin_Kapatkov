@@ -56,6 +56,14 @@
     <Compile Include="ReportsUnitTest\SessionResultReportUnitTests\SessionResultReportUnitTests.cs" />
     <Compile Include="ReportsUnitTest\GroupSessionResultReporsUnitTests\GroupSessionResultReporsUnitTests.cs" />
     <Compile Include="CRUDUnitTest\ExaminerUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\GroupUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\GroupSpecialtyUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\KnowledgeAssessmentFormUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\StudentUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\SubjectUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\SessionUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\SessionResultUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\SessionScheduleUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
