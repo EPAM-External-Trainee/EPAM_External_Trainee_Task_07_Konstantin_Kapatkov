@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ORMUnitTest\GenderUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\GenderUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportsUnitTest\ReportsUnitTestData.cs" />
     <Compile Include="ReportsUnitTest\SessionResultReportUnitTests\SessionResultReportUnitTests.cs" />
