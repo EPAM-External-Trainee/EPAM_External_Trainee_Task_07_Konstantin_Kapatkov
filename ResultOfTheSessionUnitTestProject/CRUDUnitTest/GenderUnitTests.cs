@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ResultOfTheSessionUnitTestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class GenderUnitTests
     {
         private DaoFactory daoFactory = DaoFactory.GetInstance(@"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;");
 
