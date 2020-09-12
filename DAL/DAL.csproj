@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +38,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,12 +85,14 @@
     <Compile Include="ORM\Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="DB\SQLScript\03_CreatingRelationshipsBetweenTables.sql" />
-    <Content Include="DB\SQLScript\01_DBCreation.sql" />
-    <Content Include="DB\SQLScript\04_FillingInTables.sql" />
-    <Content Include="DB\SQLScript\02_TablesCreation.sql" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\SQLScripts\03_CreatingRelationshipsBetweenTables.sql" />
+    <Content Include="DB\SQLScripts\01_DBCreation.sql" />
+    <Content Include="DB\SQLScripts\04_FillingInTables.sql" />
+    <Content Include="DB\SQLScripts\02_TablesCreation.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using BLL.Reports.Excel;
 using BLL.Reports.Models;
+using DAL.DB.DBDeployment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ResultOfTheSessionUnitTestProject.ReportsUnitTest;
 using System.IO;
@@ -225,6 +226,12 @@ namespace ResultOfTheSessionUnitTestProject
         {
             ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.SpecialityAverageAssessment, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        public void TmpTest()
+        {
+            DatabaseDeployment.ExpandTheDatabase("");
         }
     }
 }
