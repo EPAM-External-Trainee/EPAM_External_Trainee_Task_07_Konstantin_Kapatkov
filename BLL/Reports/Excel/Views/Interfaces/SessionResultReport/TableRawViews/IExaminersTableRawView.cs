@@ -8,6 +8,6 @@
 
         string ExaminerPatronymic { get; set; }
 
-        double AverageAssessment { get; set; }
+        double ExaminerAverageAssessment { get; set; }
     }
 }

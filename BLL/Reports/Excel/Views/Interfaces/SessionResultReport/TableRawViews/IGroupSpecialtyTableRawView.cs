@@ -4,6 +4,6 @@
     {
         string SpecialityName { get; set; }
 
-        double AverageAssessment { get; set; }
+        double SpecialityAverageAssessment { get; set; }
     }
 }

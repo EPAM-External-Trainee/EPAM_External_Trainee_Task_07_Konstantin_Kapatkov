@@ -91,9 +91,9 @@ namespace BLL.Reports.Models
         {
             return orderBy switch
             {
-                AssessmentDynamicsTableOrderBy.Subject => isDesc ? new AssessmentDynamicsTableView(GetTableRowsData().OrderByDescending(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)) : new AssessmentDynamicsTableView(GetTableRowsData().OrderBy(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)),
+                AssessmentDynamicsTableOrderBy.Subject => isDesc ? new AssessmentDynamicsTableView(GetTableRowsData().OrderBy(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)) : new AssessmentDynamicsTableView(GetTableRowsData().OrderByDescending(d => d.SubjectName), Sessions.Select(s => s.AcademicYear)),
                 AssessmentDynamicsTableOrderBy.AverageAssessment => isDesc ? new AssessmentDynamicsTableView(GetTableRowsData().OrderByDescending(d => d.AvgAssessments.Last()), Sessions.Select(s => s.AcademicYear)) : new AssessmentDynamicsTableView(GetTableRowsData().OrderBy(d => d.AvgAssessments.Last()), Sessions.Select(s => s.AcademicYear)),
-                _ => throw new NotImplementedException(),
+                _ => throw new Exception(),
             };
         }
     }

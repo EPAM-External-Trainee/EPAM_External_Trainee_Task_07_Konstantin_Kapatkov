@@ -98,7 +98,7 @@ namespace BLL.Reports.Excel
             for (int i = ++currentRow, j = 0; j < dataToWrite.TableRawViews.Count(); i++, j++)
             {
                 workSheet.Cells[i, 1].Value = dataToWrite.TableRawViews.ToList()[j].SpecialityName;
-                workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].AverageAssessment;
+                workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].SpecialityAverageAssessment;
             }
 
             SetBorder(excel, workSheet, "Specialty assessments");
@@ -127,7 +127,7 @@ namespace BLL.Reports.Excel
                 workSheet.Cells[i, 1].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerSurname;
                 workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerName;
                 workSheet.Cells[i, 3].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerPatronymic;
-                workSheet.Cells[i, 4].Value = dataToWrite.TableRawViews.ToList()[j].AverageAssessment;
+                workSheet.Cells[i, 4].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerAverageAssessment;
             }
 
             SetBorder(excel, workSheet, "Examiner assessments");

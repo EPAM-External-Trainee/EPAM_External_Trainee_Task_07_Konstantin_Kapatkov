@@ -51,13 +51,13 @@ namespace BLL.Reports.Models
             List<GroupSessionResultTableView> result = new List<GroupSessionResultTableView>();
             foreach (var session in Sessions)
             {
-                if (!isDescOrder)
+                if (isDescOrder)
                 {
-                    result.Add(new GroupSessionResultTableView(GetRowData(session.Id).OrderBy(predicate), GetSessionName(session.Id), GetSessionAcademicYear(session.Id)));
+                    result.Add(new GroupSessionResultTableView(GetRowData(session.Id).OrderByDescending(predicate), GetSessionName(session.Id), GetSessionAcademicYear(session.Id)));
                 }
                 else
                 {
-                    result.Add(new GroupSessionResultTableView(GetRowData(session.Id).OrderByDescending(predicate), GetSessionName(session.Id), GetSessionAcademicYear(session.Id)));
+                    result.Add(new GroupSessionResultTableView(GetRowData(session.Id).OrderBy(predicate), GetSessionName(session.Id), GetSessionAcademicYear(session.Id)));
                 }
             }
 

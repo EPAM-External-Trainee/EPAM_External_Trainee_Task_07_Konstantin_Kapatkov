@@ -1,4 +1,5 @@
-﻿using BLL.Reports.Excel;
+﻿using BLL.Reports.Enums;
+using BLL.Reports.Excel;
 using BLL.Reports.Models.ReportData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
@@ -8,19 +9,109 @@ namespace ResultOfTheSessionUnitTestProject.ReportsUnitTest
     [TestClass]
     public class GroupSessionResultReporsUnitTests : ReportsUnitTestData
     {
+        public static GroupSessionResultReport Report { get; } = new GroupSessionResultReport(ConnectionString);
+
         [TestMethod]
         public void GroupSessionResultReport_Test()
         {
-            GroupSessionResultReport report = new GroupSessionResultReport(ConnectionString);
-            ExcelWriter.WriteToExcel(report.GetReport(), PathToGroupSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(), PathToGroupSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
         }
 
         [TestMethod]
-        public void TestMethod2()
+        [DataRow(false)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderBy_GroupName_Test(bool isDesc)
         {
-            //GroupSessionResultTable report = new GroupSessionResultTable(ConnectionString);
-            //ExcelWriter.WriteToExcel(report.GetGroupSessionResultTables(), PathToGroupSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.GroupName, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderByDescending_GroupName_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.GroupName, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderBy_MaxAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.MaxAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderByDescending_MaxAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.MaxAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderBy_MinAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.MinAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderByDescending_MinAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.MinAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderBy_AvgAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.AvgAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_GropuSessionResultTable_OrderByDescending_AvgAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(r => r.AvgAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        public void GroupSessionResultReport_AssessmentDynamicsTable_OrderBy_Subject_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(AssessmentDynamicsTableOrderBy.Subject, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_AssessmentDynamicsTable_OrderByDescending_Subject_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(AssessmentDynamicsTableOrderBy.Subject, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        public void GroupSessionResultReport_AssessmentDynamicsTable_OrderBy_AverageAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(AssessmentDynamicsTableOrderBy.AverageAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
+        }
+
+        [TestMethod]
+        [DataRow(true)]
+        public void GroupSessionResultReport_AssessmentDynamicsTable_OrderByDescending_AverageAssessment_Test(bool isDesc)
+        {
+            ExcelWriter.WriteToExcel(Report.GetReport(AssessmentDynamicsTableOrderBy.AverageAssessment, isDesc), PathToGroupSessionResultReportExcelFile);
+            Assert.IsTrue(File.Exists(PathToGroupSessionResultReportExcelFile));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BLL.Reports.Excel.Views.SessionResultReport
             ExaminerSurname = examinerSurname;
             ExaminerName = examinerName;
             ExaminerPatronymic = examinerPatronymic;
-            AverageAssessment = averageAssessment;
+            ExaminerAverageAssessment = averageAssessment;
         }
 
         public string ExaminerSurname { get; set; }
@@ -18,9 +18,9 @@ namespace BLL.Reports.Excel.Views.SessionResultReport
 
         public string ExaminerPatronymic { get; set; }
 
-        public double AverageAssessment { get; set; }
+        public double ExaminerAverageAssessment { get; set; }
 
-        public override bool Equals(object obj) => obj is ExaminersTableRawView view && ExaminerSurname == view.ExaminerSurname && ExaminerName == view.ExaminerName && ExaminerPatronymic == view.ExaminerPatronymic && AverageAssessment == view.AverageAssessment;
+        public override bool Equals(object obj) => obj is ExaminersTableRawView view && ExaminerSurname == view.ExaminerSurname && ExaminerName == view.ExaminerName && ExaminerPatronymic == view.ExaminerPatronymic && ExaminerAverageAssessment == view.ExaminerAverageAssessment;
 
         public override int GetHashCode()
         {
@@ -28,7 +28,7 @@ namespace BLL.Reports.Excel.Views.SessionResultReport
             hashCode = (hashCode * -1521134295) + ExaminerSurname.GetHashCode();
             hashCode = (hashCode * -1521134295) + ExaminerName.GetHashCode();
             hashCode = (hashCode * -1521134295) + ExaminerPatronymic.GetHashCode();
-            hashCode = (hashCode * -1521134295) + AverageAssessment.GetHashCode();
+            hashCode = (hashCode * -1521134295) + ExaminerAverageAssessment.GetHashCode();
             return hashCode;
         }
     }

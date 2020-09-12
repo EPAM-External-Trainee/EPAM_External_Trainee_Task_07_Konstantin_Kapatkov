@@ -39,11 +39,11 @@ namespace BLL.Reports.Models.SessionResultReportData
             {
                 if (isDescOrder)
                 {
-                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderByDescending(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
+                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderBy(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
                 }
                 else
                 {
-                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderBy(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
+                    result.Add(new GroupTableView(GetGroupTableRowsData(sessionId, groupId).OrderByDescending(predicate), GetGroupName(groupId), GetSessionName(sessionId)));
                 }
             }
             return result;

@@ -27,7 +27,7 @@ namespace BLL.Reports.Models.ReportData
             };
         }
 
-        public GroupSessionResultReportView GetReport(Func<GroupSessionResultTableRawView, object> predicate, bool isDescOrder)
+        public GroupSessionResultReportView GetReport(Func<GroupSessionResultTableRawView, object> predicate, bool isDescOrder = false)
         {
             return new GroupSessionResultReportView
             {

@@ -19,18 +19,18 @@ namespace BLL.Reports.Models.SessionResultReportData.Tables
         {
             return from ss in SessionSchedules
                    join ex in Examiners on ss.ExaminerId equals ex.Id
-                   where ss.SessionId == sessionId
+                   where ss.SessionId == sessionId && ss.KnowledgeAssessmentFormId == 1
                    select ex;
         }
 
-        private IEnumerable<double> GetExaminerAssessmnets(int examinerId)
+        private IEnumerable<double> GetExaminerAssessmnets(int sessionId, int examinerId)
         {
             return from g in Groups
-                   join st in Students on g.Id equals st.Id
+                   join st in Students on g.Id equals st.GroupId
                    join sr in SessionResults on st.Id equals sr.StudentId
-                   join ss in SessionSchedules on g.Id equals ss.GroupId
+                   join ss in SessionSchedules on st.GroupId equals ss.GroupId
                    join ex in Examiners on ss.ExaminerId equals ex.Id
-                   where ss.KnowledgeAssessmentFormId == 1 && ex.Id == examinerId && ss.SubjectId == sr.SubjectId
+                   where ss.KnowledgeAssessmentFormId == 1 && ex.Id == examinerId && ss.SubjectId == sr.SubjectId && ss.SessionId == sessionId
                    select double.Parse(sr.Assessment);
         }
 
@@ -42,7 +42,7 @@ namespace BLL.Reports.Models.SessionResultReportData.Tables
 
             foreach (var examiner in sessionExaminers)
             {
-                examinerAssessmnets.AddRange(GetExaminerAssessmnets(examiner.Id));
+                examinerAssessmnets.AddRange(GetExaminerAssessmnets(sessionId, examiner.Id));
                 result.Add(new ExaminersTableRawView(examiner.Surname, examiner.Name, examiner.Patronymic, Math.Round(examinerAssessmnets.Average(), 2)));
                 examinerAssessmnets.Clear();
             }
@@ -52,6 +52,6 @@ namespace BLL.Reports.Models.SessionResultReportData.Tables
 
         public ExaminersTableView GetExaminersTableData(int sessionId) => new ExaminersTableView(GetExaminersTableRawsData(sessionId));
 
-        public ExaminersTableView GetExaminersTableData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderBy(predicate)) : new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderByDescending(predicate));
+        public ExaminersTableView GetExaminersTableData(int sessionId, Func<ExaminersTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderByDescending(predicate)) : new ExaminersTableView(GetExaminersTableRawsData(sessionId).OrderBy(predicate));
     }
 }
