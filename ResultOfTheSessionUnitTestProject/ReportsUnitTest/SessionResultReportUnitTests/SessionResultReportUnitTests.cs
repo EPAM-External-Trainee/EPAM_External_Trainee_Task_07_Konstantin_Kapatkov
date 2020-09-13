@@ -55,7 +55,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, false)]
         public void SessionResultReport_GroupTable_OrderBy_Form_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Form, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.AssessmentForm, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -63,7 +63,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, true)]
         public void SessionResultReport_GroupTable_OrderByDesceding_Form_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Form, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.AssessmentForm, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -71,7 +71,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, false)]
         public void SessionResultReport_GroupTable_OrderBy_Name_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Name, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentName, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -79,7 +79,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, true)]
         public void SessionResultReport_GroupTable_OrderByDesceding_Name_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Name, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentName, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -87,7 +87,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, false)]
         public void SessionResultReport_GroupTable_OrderBy_Surname_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Surname, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentSurname, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -95,7 +95,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, true)]
         public void SessionResultReport_GroupTable_OrderByDesceding_Surname_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Surname, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentSurname, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -103,7 +103,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, false)]
         public void SessionResultReport_GroupTable_OrderBy_Patronymic_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Patronymic, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentPatronymic, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 
@@ -111,7 +111,7 @@ namespace ResultOfTheSessionUnitTestProject
         [DataRow(1, true)]
         public void SessionResultReport_GroupTable_OrderByDesceding_Patronymic_Test(int sessionId, bool isDesc)
         {
-            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.Patronymic, isDesc), PathToSessionResultReportExcelFile);
+            ExcelWriter.WriteToExcel(Report.GetReport(sessionId, r => r.StudentPatronymic, isDesc), PathToSessionResultReportExcelFile);
             Assert.IsTrue(File.Exists(PathToSessionResultReportExcelFile));
         }
 

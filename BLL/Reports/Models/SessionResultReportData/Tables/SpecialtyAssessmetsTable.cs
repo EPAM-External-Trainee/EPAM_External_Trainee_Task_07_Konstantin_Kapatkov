@@ -9,12 +9,19 @@ using System.Linq;
 
 namespace BLL.Reports.Models.SessionResultReportData
 {
+    /// <summary>Class describing specialty assessmets table functionality</summary>
     public class SpecialtyAssessmetsTable : Report, ISpecialtyAssessmetsTable
     {
+        /// <summary>Creating an instance of <see cref="SpecialtyAssessmetsTable"/> via connection string</summary>
+        /// <param name="connectionString">SQL Server connection string</param>
         public SpecialtyAssessmetsTable(string connectionString) : base(connectionString)
         {
         }
 
+        /// <summary>Getting assessments</summary>
+        /// <param name="sessionId">Session id</param>
+        /// <param name="specialtyId">Specialty id</param>
+        /// <returns><see cref="IEnumerable{double}"/> assessments</returns>
         private IEnumerable<double> GetAssessments(int sessionId, int specialtyId)
         {
             return from g in Groups
@@ -26,6 +33,9 @@ namespace BLL.Reports.Models.SessionResultReportData
                    select double.Parse(sr.Assessment);
         }
 
+        /// <summary>Getting group specialities</summary>
+        /// <param name="sessionId">Session id</param>
+        /// <returns><see cref="IEnumerable{GroupSpecialty}"/> group specialities</returns>
         private IEnumerable<GroupSpecialty> GetGroupSpecialities(int sessionId)
         {
             return from g in Groups
@@ -37,24 +47,29 @@ namespace BLL.Reports.Models.SessionResultReportData
                    select gs;
         }
 
-        private IEnumerable<SpecialtyAssessmetsTableRawView> GetGroupSpecialtyTableRawsData(int sessionId)
+        /// <summary>Getting group specialty table raws data</summary>
+        /// <param name="sessionId">Session id</param>
+        /// <returns><see cref="IEnumerable{SpecialtyAssessmetsTableRowView}"/> group specialty table raws data</returns>
+        private IEnumerable<SpecialtyAssessmetsTableRowView> GetGroupSpecialtyTableRawsData(int sessionId)
         {
             IEnumerable<GroupSpecialty> groupSpecialities = GetGroupSpecialities(sessionId).Distinct();
-            List<SpecialtyAssessmetsTableRawView> result = new List<SpecialtyAssessmetsTableRawView>();
+            List<SpecialtyAssessmetsTableRowView> result = new List<SpecialtyAssessmetsTableRowView>();
             List<double> assessments = new List<double>();
 
             foreach (var specialty in groupSpecialities)
             {
                 assessments.AddRange(GetAssessments(sessionId, specialty.Id));
-                result.Add(new SpecialtyAssessmetsTableRawView(specialty.Name, Math.Round(assessments.Average(), 2)));
+                result.Add(new SpecialtyAssessmetsTableRowView(specialty.Name, Math.Round(assessments.Average(), 2)));
                 assessments.Clear();
             }
 
             return result;
         }
 
+        /// <inheritdoc cref="ISpecialtyAssessmetsTable.GetSpecialtyAssessmetsTableData(int)"/>
         public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId) => new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId));
 
-        public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId, Func<SpecialtyAssessmetsTableRawView, object> predicate, bool isDescOrder) => isDescOrder ? new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate)) : new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderByDescending(predicate));
+        /// <inheritdoc cref="ISpecialtyAssessmetsTable.GetSpecialtyAssessmetsTableData(int, Func{SpecialtyAssessmetsTableRowView, object}, bool)"/>
+        public SpecialtyAssessmetsTableView GetSpecialtyAssessmetsTableData(int sessionId, Func<SpecialtyAssessmetsTableRowView, object> predicate, bool isDescOrder) => isDescOrder ? new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderBy(predicate)) : new SpecialtyAssessmetsTableView(GetGroupSpecialtyTableRawsData(sessionId).OrderByDescending(predicate));
     }
 }

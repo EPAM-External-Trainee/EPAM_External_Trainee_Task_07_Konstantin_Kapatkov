@@ -11,8 +11,13 @@ using System.Linq;
 
 namespace BLL.Reports.Excel
 {
+    /// <summary>Functionality for working with excel documents</summary>
     public static class ExcelWriter
     {
+        /// <summary>Setting borders for cells</summary>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
+        /// <param name="workSheetName">work sheet name</param>
         private static void SetBorder(ExcelPackage excel, ExcelWorksheet workSheet, string workSheetName)
         {
             workSheet = excel.Workbook.Worksheets[workSheetName];
@@ -23,6 +28,8 @@ namespace BLL.Reports.Excel
             workSheet.Cells[workSheet.Dimension.Address].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
         }
 
+        /// <summary>Setting style for work sheet</summary>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void SetWorkSheetStyle(ExcelWorksheet workSheet)
         {
             workSheet.TabColor = Color.Black;
@@ -30,6 +37,8 @@ namespace BLL.Reports.Excel
             workSheet.DefaultColWidth = 20;
         }
 
+        /// <summary>Setting row style for excel row</summary>
+        /// <param name="row"><see cref="ExcelRow"/> object</param>
         private static void SetRowStyle(ExcelRow row)
         {
             row.Height = 20;
@@ -37,6 +46,10 @@ namespace BLL.Reports.Excel
             row.Style.Font.Bold = true;
         }
 
+        /// <summary>Writing <see cref="GroupTableView"/> objects to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="IEnumerable{GroupTableView}"/> objects to write</param>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void WriteGroupTable(IEnumerable<GroupTableView> dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             foreach (var groupTableView in dataToWrite)
@@ -64,11 +77,11 @@ namespace BLL.Reports.Excel
 
                 for (int i = ++currentRow, j = 0; j < groupTableView.TableRawViews.Count(); i++, j++)
                 {
-                    workSheet.Cells[i, 1].Value = groupTableView.TableRawViews.ToList()[j].Surname;
-                    workSheet.Cells[i, 2].Value = groupTableView.TableRawViews.ToList()[j].Name;
-                    workSheet.Cells[i, 3].Value = groupTableView.TableRawViews.ToList()[j].Patronymic;
+                    workSheet.Cells[i, 1].Value = groupTableView.TableRawViews.ToList()[j].StudentSurname;
+                    workSheet.Cells[i, 2].Value = groupTableView.TableRawViews.ToList()[j].StudentName;
+                    workSheet.Cells[i, 3].Value = groupTableView.TableRawViews.ToList()[j].StudentPatronymic;
                     workSheet.Cells[i, 4].Value = groupTableView.TableRawViews.ToList()[j].Subject;
-                    workSheet.Cells[i, 5].Value = groupTableView.TableRawViews.ToList()[j].Form;
+                    workSheet.Cells[i, 5].Value = groupTableView.TableRawViews.ToList()[j].AssessmentForm;
                     workSheet.Cells[i, 6].Value = groupTableView.TableRawViews.ToList()[j].Date;
                     workSheet.Cells[i, 7].Value = groupTableView.TableRawViews.ToList()[j].Assessment;
                 }
@@ -77,6 +90,10 @@ namespace BLL.Reports.Excel
             }
         }
 
+        /// <summary>Writing <see cref="SpecialtyAssessmetsTableView"/> object to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="SpecialtyAssessmetsTableView"/> object to write</param>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void WriteSpecialtyAssessmetsTable(SpecialtyAssessmetsTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
@@ -104,6 +121,10 @@ namespace BLL.Reports.Excel
             SetBorder(excel, workSheet, "Specialty assessments");
         }
 
+        /// <summary>Writing <see cref="ExaminersTableView"/> object to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="ExaminersTableView"/> object to write</param>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void WriteExaminersTable(ExaminersTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
@@ -122,17 +143,21 @@ namespace BLL.Reports.Excel
                 workSheet.Cells[currentRow, ++i].Value = dataToWrite.Headers[--i];
             }
 
-            for (int i = ++currentRow, j = 0; j < dataToWrite.TableRawViews.Count(); i++, j++)
+            for (int i = ++currentRow, j = 0; j < dataToWrite.TableRowViews.Count(); i++, j++)
             {
-                workSheet.Cells[i, 1].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerSurname;
-                workSheet.Cells[i, 2].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerName;
-                workSheet.Cells[i, 3].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerPatronymic;
-                workSheet.Cells[i, 4].Value = dataToWrite.TableRawViews.ToList()[j].ExaminerAverageAssessment;
+                workSheet.Cells[i, 1].Value = dataToWrite.TableRowViews.ToList()[j].ExaminerSurname;
+                workSheet.Cells[i, 2].Value = dataToWrite.TableRowViews.ToList()[j].ExaminerName;
+                workSheet.Cells[i, 3].Value = dataToWrite.TableRowViews.ToList()[j].ExaminerPatronymic;
+                workSheet.Cells[i, 4].Value = dataToWrite.TableRowViews.ToList()[j].ExaminerAverageAssessment;
             }
 
             SetBorder(excel, workSheet, "Examiner assessments");
         }
 
+        /// <summary>Writing <see cref="AssessmentDynamicsTableView"/> object to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="AssessmentDynamicsTableView"/> object to write</param>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void WriteAssessmentDynamicsTable(AssessmentDynamicsTableView dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             int currentRow = 1;
@@ -180,6 +205,10 @@ namespace BLL.Reports.Excel
             SetBorder(excel, workSheet, "Assessment dynamics");
         }
 
+        /// <summary>Writing <see cref="GroupSessionResultTableView"/> objects to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="IEnumerable{GroupSessionResultTableView}"/> objects to write</param>
+        /// <param name="excel"><see cref="ExcelPackage"/> object</param>
+        /// <param name="workSheet"><see cref="ExcelWorksheet"/> object</param>
         private static void WriteGroupSessionResultTable(IEnumerable<GroupSessionResultTableView> dataToWrite, ExcelPackage excel, ExcelWorksheet workSheet)
         {
             foreach (var table in dataToWrite)
@@ -212,6 +241,9 @@ namespace BLL.Reports.Excel
             }
         }
 
+        /// <summary>Writing <see cref="SessionResultReportView"/> object to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="SessionResultReportView"/> object to write</param>
+        /// <param name="filePath">File path</param>
         public static void WriteToExcel(SessionResultReportView dataToWrite, string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;

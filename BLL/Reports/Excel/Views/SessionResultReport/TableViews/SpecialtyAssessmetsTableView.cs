@@ -4,16 +4,22 @@ using System.Collections.Generic;
 
 namespace BLL.Reports.Views.SessionResultReport.TableView
 {
+    /// <summary>Class describing the view of the specialty assessmets table</summary>
     public class SpecialtyAssessmetsTableView : ISpecialtyAssessmetsTableView
     {
+        /// <summary>Default constructor</summary>
         public SpecialtyAssessmetsTableView()
         {
         }
 
-        public SpecialtyAssessmetsTableView(IEnumerable<SpecialtyAssessmetsTableRawView> tableRawViews) => TableRawViews = tableRawViews;
+        /// <summary>Creating an isntance of <see cref="SpecialtyAssessmetsTableView"/> via table raw views</summary>
+        /// <param name="tableRawViews"></param>
+        public SpecialtyAssessmetsTableView(IEnumerable<SpecialtyAssessmetsTableRowView> tableRawViews) => TableRawViews = tableRawViews;
 
+        /// <inheritdoc cref="ISpecialtyAssessmetsTableView.Headers"/>
         public string[] Headers { get; } = { "Specialty", "Average assessment" };
 
-        public IEnumerable<SpecialtyAssessmetsTableRawView> TableRawViews { get; set; }
+        /// <inheritdoc cref="ISpecialtyAssessmetsTableView.TableRawViews"/>
+        public IEnumerable<SpecialtyAssessmetsTableRowView> TableRawViews { get; set; }
     }
 }
