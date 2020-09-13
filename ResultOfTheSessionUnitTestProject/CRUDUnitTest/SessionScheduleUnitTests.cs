@@ -5,6 +5,7 @@ using ResultOfTheSessionUnitTestProject.CRUDUnitTest;
 
 namespace ResultOfTheSessionUnitTestProject
 {
+    /// <summary>Class describes testing CRUD functionality for <see cref="SessionSchedule"/> model</summary>
     [TestClass]
     public class SessionScheduleUnitTests : CRUDUnitTestData
     {

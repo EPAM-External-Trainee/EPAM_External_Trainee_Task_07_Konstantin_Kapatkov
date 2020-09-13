@@ -52,12 +52,12 @@
     <Compile Include="CRUDUnitTest\CRUDUnitTestData.cs" />
     <Compile Include="CRUDUnitTest\GenderUnitTests.cs" />
     <Compile Include="CRUDUnitTest\ExaminerUnitTests.cs" />
+    <Compile Include="CRUDUnitTest\GroupUnitTests.cs" />
     <Compile Include="DBDeploymentTest\DBDeploymentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportsUnitTest\ReportsUnitTestData.cs" />
     <Compile Include="ReportsUnitTest\SessionResultReportUnitTests\SessionResultReportUnitTests.cs" />
-    <Compile Include="ReportsUnitTest\GroupSessionResultReporsUnitTests\GroupSessionResultReporsUnitTests.cs" />
-    <Compile Include="CRUDUnitTest\GroupUnitTests.cs" />
+    <Compile Include="ReportsUnitTest\GroupSessionResultReportUnitTests\GroupSessionResultReportUnitTests.cs" />
     <Compile Include="CRUDUnitTest\GroupSpecialtyUnitTests.cs" />
     <Compile Include="CRUDUnitTest\KnowledgeAssessmentFormUnitTests.cs" />
     <Compile Include="CRUDUnitTest\StudentUnitTests.cs" />

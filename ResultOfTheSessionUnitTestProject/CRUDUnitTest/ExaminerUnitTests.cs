@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ResultOfTheSessionUnitTestProject.CRUDUnitTest
 {
+    /// <summary>Class describes testing CRUD functionality for <see cref="Examiner"/> model</summary>
     [TestClass]
     public class ExaminerUnitTests : CRUDUnitTestData
     {

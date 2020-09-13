@@ -6,8 +6,9 @@ using System.IO;
 
 namespace ResultOfTheSessionUnitTestProject.ReportsUnitTest
 {
+    /// <summary>Class describes functionality for testing <see cref="GroupSessionResultReport"/> class</summary>
     [TestClass]
-    public class GroupSessionResultReporsUnitTests : ReportsUnitTestData
+    public class GroupSessionResultReportUnitTests : ReportsUnitTestData
     {
         public static GroupSessionResultReport Report { get; } = new GroupSessionResultReport(ConnectionString);
 

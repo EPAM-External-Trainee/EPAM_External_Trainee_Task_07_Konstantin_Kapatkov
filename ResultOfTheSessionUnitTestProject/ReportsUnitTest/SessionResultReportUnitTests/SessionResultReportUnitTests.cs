@@ -6,6 +6,7 @@ using System.IO;
 
 namespace ResultOfTheSessionUnitTestProject
 {
+    /// <summary>Class describes functionality for testing <see cref="SessionResultReport"/> class</summary>
     [TestClass]
     public class SessionResultReportUnitTests : ReportsUnitTestData
     {

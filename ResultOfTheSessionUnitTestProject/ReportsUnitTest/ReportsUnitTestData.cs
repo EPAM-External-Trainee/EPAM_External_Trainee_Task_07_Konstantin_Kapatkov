@@ -1,5 +1,6 @@
 ﻿namespace ResultOfTheSessionUnitTestProject.ReportsUnitTest
 {
+    /// <summary>Class describes common data for testing reports classes</summary>
     public abstract class ReportsUnitTestData
     {
         protected const string ConnectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;";

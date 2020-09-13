@@ -4,6 +4,7 @@ using ResultOfTheSessionUnitTestProject.CRUDUnitTest;
 
 namespace ResultOfTheSessionUnitTestProject
 {
+    /// <summary>Class describes testing CRUD functionality for <see cref="KnowledgeAssessmentForm"/> model</summary>
     [TestClass]
     public class KnowledgeAssessmentFormUnitTests : CRUDUnitTestData
     {

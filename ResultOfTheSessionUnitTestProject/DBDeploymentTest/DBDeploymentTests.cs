@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ResultOfTheSessionUnitTestProject.DBDeploymentTest
 {
+    /// <summary>Class describes functionality for testing <see cref="DatabaseDeployment"/> class</summary>
     [TestClass]
     public class DBDeploymentTests
     {
