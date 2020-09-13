@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
+    /// <summary>Class describes CRUD functionality for <see cref="Subject"/> model</summary>
     public class DaoSubject : IDao<Subject>
     {
+        /// <summary>SQL Server connection string</summary>
         private readonly string _connectionString;
 
+        /// <summary>Creating an instance of <see cref="DaoStudent"/> via connection string</summary>
+        /// <param name="connectionString"></param>
         public DaoSubject(string connectionString) => _connectionString = connectionString;
 
+        /// <inheritdoc cref="IDao{T}.TryCreateAsync(T)"/>
         public async Task<bool> TryCreateAsync(Subject data)
         {
             try
@@ -27,6 +32,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAsync(int)"/>
         public async Task<Subject> TryReadAsync(int id)
         {
             try
@@ -40,6 +46,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryUpdateAsync(T)"/>
         public async Task<bool> TryUpdateAsync(Subject data)
         {
             try
@@ -59,6 +66,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryDeleteAsync(int)"/>
         public async Task<bool> TryDeleteAsync(int id)
         {
             try
@@ -73,6 +81,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAllAsync"/>
         public async Task<IEnumerable<Subject>> TryReadAllAsync()
         {
             try

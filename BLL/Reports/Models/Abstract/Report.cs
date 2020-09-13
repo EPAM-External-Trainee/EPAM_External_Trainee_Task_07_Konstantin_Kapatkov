@@ -8,6 +8,8 @@ namespace BLL.Reports.Abstract
 {
     public abstract class Report : IReport
     {
+        /// <summary>Constructor for initializing data</summary>
+        /// <param name="connectionString">SQL Server connection string</param>
         protected Report(string connectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=ResultSession; Integrated Security=true;")
         {
             DaoFactory = DaoFactory.GetInstance(connectionString);
@@ -22,24 +24,34 @@ namespace BLL.Reports.Abstract
             GroupSpecialties = DaoFactory.GetDaoGroupSpecialty().TryReadAllAsync().Result;
         }
 
+        /// <inheritdoc cref="IReport.DaoFactory"/>
         public DaoFactory DaoFactory { get; set; }
 
+        /// <inheritdoc cref="IReport.Sessions"/>
         public IEnumerable<Session> Sessions { get; set; }
 
+        /// <inheritdoc cref="IReport.SessionResults"/>
         public IEnumerable<SessionResult> SessionResults { get; set; }
 
+        /// <inheritdoc cref="IReport.SessionSchedules"/>
         public IEnumerable<SessionSchedule> SessionSchedules { get; set; }
 
+        /// <inheritdoc cref="IReport.Groups"/>
         public IEnumerable<Group> Groups { get; set; }
 
+        /// <inheritdoc cref="IReport.KnowledgeAssessmentForms"/>
         public IEnumerable<KnowledgeAssessmentForm> KnowledgeAssessmentForms { get; set; }
 
+        /// <inheritdoc cref="IReport.Students"/>
         public IEnumerable<Student> Students { get; set; }
 
+        /// <inheritdoc cref="IReport.Subjects"/>
         public IEnumerable<Subject> Subjects { get; set; }
 
+        /// <inheritdoc cref="IReport.Examiners"/>
         public IEnumerable<Examiner> Examiners { get; set; }
 
+        /// <inheritdoc cref="IReport.GroupSpecialties"/>
         public IEnumerable<GroupSpecialty> GroupSpecialties { get; set; }
     }
 }

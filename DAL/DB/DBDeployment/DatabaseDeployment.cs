@@ -1,33 +1,40 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace DAL.DB.DBDeployment
 {
+    /// <summary>Class describes functionality for database deployment</summary>
     public static class DatabaseDeployment
     {
-        private const string _filesLocation = @"..\..\..\DAL\DB\SQLScripts";
-        private const string _filesExtension = "*.sql";
+        /// <summary>SQL scripts files location</summary>
+        private const string _sqlScriptsLocation = @"..\..\..\DAL\DB\SQLScripts";
+
+        /// <summary>SQL scripts file extension</summary>
+        private const string _sqlScriptsExtension = "*.sql";
+
+        /// <summary>Regex for correct spliting scripts contains 'GO'</summary>
         private static readonly Regex _regex = new Regex(@"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
-        public static bool ExpandTheDatabase(string serverConnectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=master; Integrated Security=true;")
+        /// <summary>Expanding database</summary>
+        /// <param name="serverConnectionString">SQL Server connection string</param>
+        /// <remarks>SQL Server connection string must have 'master' as initial catalog</remarks>
+        /// <returns>Operation result</returns>
+        public static async Task<bool> TryExpandTheDatabaseAsync(string serverConnectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=master; Integrated Security=true;")
         {
             try
             {
-                string[] files = Directory.GetFiles(_filesLocation, _filesExtension).Select(Path.GetFileName).ToArray();
                 using var connection = new SqlConnection(serverConnectionString);
-                connection.Open();
+                await connection.OpenAsync().ConfigureAwait(false);
 
-                foreach (var fileName in files)
+                foreach (var fileName in Directory.GetFiles(_sqlScriptsLocation, _sqlScriptsExtension).Select(Path.GetFileName).ToArray())
                 {
-                    string script = File.ReadAllText(Path.Combine(_filesLocation, fileName));
-                    IEnumerable<string> commands = _regex.Split(script);
-                    foreach (string command in commands.Where(command => command.Trim() != ""))
+                    foreach (string command in _regex.Split(File.ReadAllText(Path.Combine(_sqlScriptsLocation, fileName))).Where(command => command.Trim() != ""))
                     {
                         using var sqlCommand = new SqlCommand(command, connection);
-                        sqlCommand.ExecuteNonQuery();
+                        await sqlCommand.ExecuteNonQueryAsync().ConfigureAwait(false);
                     }
                 }
 

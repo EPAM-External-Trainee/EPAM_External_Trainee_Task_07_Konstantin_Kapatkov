@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
+    /// <summary>Class describes CRUD functionality for <see cref="KnowledgeAssessmentForm"/> model</summary>
     public class DaoKnowledgeAssessmentForm : IDao<KnowledgeAssessmentForm>
     {
+        /// <summary>SQL Server connection string</summary>
         private readonly string _connectionString;
 
+        /// <summary>Creating an instance of <see cref="DaoKnowledgeAssessmentForm"/> via connection string</summary>
+        /// <param name="connectionString"></param>
         public DaoKnowledgeAssessmentForm(string connectionString) => _connectionString = connectionString;
 
+        /// <inheritdoc cref="IDao{T}.TryCreateAsync(T)"/>
         public async Task<bool> TryCreateAsync(KnowledgeAssessmentForm data)
         {
             try
@@ -27,6 +32,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAsync(int)"/>
         public async Task<KnowledgeAssessmentForm> TryReadAsync(int id)
         {
             try
@@ -40,6 +46,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryUpdateAsync(T)"/>
         public async Task<bool> TryUpdateAsync(KnowledgeAssessmentForm data)
         {
             try
@@ -59,6 +66,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryDeleteAsync(int)"/>
         public async Task<bool> TryDeleteAsync(int id)
         {
             try
@@ -73,6 +81,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAllAsync"/>
         public async Task<IEnumerable<KnowledgeAssessmentForm>> TryReadAllAsync()
         {
             try

@@ -9,7 +9,7 @@ namespace ResultOfTheSessionUnitTestProject.DBDeploymentTest
         [TestMethod]
         public void DBDeploy_IsTrue_Test()
         {
-            Assert.IsTrue(DatabaseDeployment.ExpandTheDatabase());
+            Assert.IsTrue(DatabaseDeployment.TryExpandTheDatabaseAsync().Result);
         }
     }
 }

@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL.DAO.Models
 {
+    /// <summary>Class describes CRUD functionality for <see cref="Session"/> model</summary>
     public class DaoSession : IDao<Session>
     {
+        /// <summary>SQL Server connection string</summary>
         private readonly string _connectionString;
 
+        /// <summary>Creating an instance of <see cref="DaoSession"/> via connection string</summary>
+        /// <param name="connectionString"></param>
         public DaoSession(string connectionString) => _connectionString = connectionString;
 
+        /// <inheritdoc cref="IDao{T}.TryCreateAsync(T)"/>
         public async Task<bool> TryCreateAsync(Session data)
         {
             try
@@ -27,6 +32,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAsync(int)"/>
         public async Task<Session> TryReadAsync(int id)
         {
             try
@@ -40,6 +46,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryUpdateAsync(T)"/>
         public async Task<bool> TryUpdateAsync(Session data)
         {
             try
@@ -60,6 +67,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryDeleteAsync(int)"/>
         public async Task<bool> TryDeleteAsync(int id)
         {
             try
@@ -78,6 +86,7 @@ namespace DAL.DAO.Models
             }
         }
 
+        /// <inheritdoc cref="IDao{T}.TryReadAllAsync"/>
         public async Task<IEnumerable<Session>> TryReadAllAsync()
         {
             try
