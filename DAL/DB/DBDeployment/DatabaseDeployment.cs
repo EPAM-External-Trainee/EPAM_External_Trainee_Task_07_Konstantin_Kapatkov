@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -13,12 +12,11 @@ namespace DAL.DB.DBDeployment
         private const string _filesExtension = "*.sql";
         private static readonly Regex _regex = new Regex(@"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
-        public static void ExpandTheDatabase(string serverConnectionString)
+        public static bool ExpandTheDatabase(string serverConnectionString = @"Data Source=KONSTANTINPC\SQLEXPRESS; Initial Catalog=master; Integrated Security=true;")
         {
             try
             {
                 string[] files = Directory.GetFiles(_filesLocation, _filesExtension).Select(Path.GetFileName).ToArray();
-
                 using var connection = new SqlConnection(serverConnectionString);
                 connection.Open();
 
@@ -26,16 +24,18 @@ namespace DAL.DB.DBDeployment
                 {
                     string script = File.ReadAllText(Path.Combine(_filesLocation, fileName));
                     IEnumerable<string> commands = _regex.Split(script);
-                    foreach (var command in commands.Where(command => command.Trim() != ""))
+                    foreach (string command in commands.Where(command => command.Trim() != ""))
                     {
                         using var sqlCommand = new SqlCommand(command, connection);
                         sqlCommand.ExecuteNonQuery();
                     }
                 }
+
+                return true;
             }
-            catch(Exception exc)
+            catch
             {
-                throw new Exception(exc.Message);
+                return false;
             }
         }
     }
