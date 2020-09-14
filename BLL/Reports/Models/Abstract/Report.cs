@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace BLL.Reports.Abstract
 {
+    /// <summary>Class describes data for report operations</summary>
     public abstract class Report : IReport
     {
         /// <summary>Constructor for initializing data</summary>

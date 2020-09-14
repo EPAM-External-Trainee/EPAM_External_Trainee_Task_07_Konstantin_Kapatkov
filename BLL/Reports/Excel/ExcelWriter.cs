@@ -262,6 +262,9 @@ namespace BLL.Reports.Excel
             workSheet?.Dispose();
         }
 
+        /// <summary>Writing <see cref="GroupSessionResultReportView"/> object to an excel file</summary>
+        /// <param name="dataToWrite"><see cref="GroupSessionResultReportView"/> object to write</param>
+        /// <param name="filePath">File path</param>
         public static void WriteToExcel(GroupSessionResultReportView dataToWrite, string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
