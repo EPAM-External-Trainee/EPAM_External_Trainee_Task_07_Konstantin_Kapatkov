@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{3F274174-8A1F-4821-94C9-69055D3D1F11}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ResultSessionDatabase", "ResultSessionDatabase\ResultSessionDatabase.sqlproj", "{9E0CCD72-2EDA-4EF2-B6A0-92A4C642B0B8}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ResultSessionDatabase", "Database\ResultSessionDatabase.sqlproj", "{9E0CCD72-2EDA-4EF2-B6A0-92A4C642B0B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
