@@ -1,7 +1,7 @@
-﻿using System;
-using DAL.ORM.Models;
+﻿using DAL.ORM.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ResultOfTheSessionUnitTestProject.CRUDUnitTest;
+using System;
 
 namespace ResultOfTheSessionUnitTestProject
 {

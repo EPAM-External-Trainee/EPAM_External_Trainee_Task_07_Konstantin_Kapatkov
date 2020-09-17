@@ -23,7 +23,6 @@ namespace BLL.Reports.Excel.Views.SessionResultReport
         /// <inheritdoc cref="object.Equals(object)"/>
         public override bool Equals(object obj) => obj is SpecialtyAssessmetsTableRowView view && SpecialityName == view.SpecialityName && SpecialityAverageAssessment == view.SpecialityAverageAssessment;
 
-
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
